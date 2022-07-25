@@ -6,71 +6,90 @@ In Unix System, the most generic sense of the term **shell** means any program t
 ### General learning objectives
 
 -   **Who designed and implemented the original Unix operating system?**
+
 In the 1960s and 1970s Dennis Ritchie and Ken Thompson invented Unix, arguably the world's most important computer operating system.
 
 -   **Who wrote the first version of the UNIX shell?**
+
 The first Unix shell was the Thompson shell, sh, written by Ken Thompson at Bell Labs and distributed with Versions 1 through 6 of Unix, from 1971 to 1975.
 
 -   **Who invented the B programming language (the direct predecessor to the C programming language)?**
+
 Ken Thompson invented the B programming language, the direct predecessor to the C programming language, and was one of the creators and early developers of the Plan 9 operating system.
 
 -   **Who is Ken Thompson?**
+
 Kenneth Lane Thompson (born February 4, 1943) is an American pioneer of computer science. Thompson worked at Bell Labs for most of his career where he designed and implemented the original Unix operating system. He also invented the B (programming language), the direct predecessor to the C (programming language), and was one of the creators and early developers of the Plan 9 from Bell Labs operating system. Since 2006, Thompson has worked at Google, where he co-developed the Go (programming language).
 Other notable contributions included his work on regular expression and early computer text editors QED (text editor) and ed (text editor), the definition of the UTF-8 encoding, and his work on computer chess that included the creation of endgame tablebase and the chess machine Belle (chess machine). He won the Turing Award in 1983 with his long-term colleague Dennis Ritchie.
 
 -   **How does a shell work?**
+
 The shell is your interface to the operating system. It acts as a command interpreter; it takes each command and passes it to the operating system.  It then displays the results of this operation on your screen. There are several shells in widespread use.
 
 -   **What is a pid and a ppid?**
+
 In Linux and Unix-like systems, each process is assigned a process ID, or PID. This is how the operating system identifies and keeps track of processes.
 PPID is a process that creates a new process is called a parent process; the new process is called a child process. The parent process ID (PPID) becomes associated with the new child process when it is created.
 
 -   **How to manipulate the environment of the current process?**
+
 Every process comes with an environment. When a new process is created, it inherits a copy of its parent’s environment. To access the entire environment within a process, you have several options:
 -via the  `main`  function
 -via the global variable  `environ`  (man environ)
 
 -   **What is the difference between a function and a system call?**
+
 The main difference between system call and function call is that a system call is a request for the kernel to access a resource while a function call is a request made by a program to perform a specific task.
 
 -   **How to create processes?**
+
 By calling fork (). A new process can then be created. By copying the addresses of the previous processes into the new ones, you can create a new identity. This produces a new process from the old one. It is a parent process, and a child process is created following it.
 
 -   **What are the three prototypes of  `main`?**
-int main()
-int main(int argc, char *argv[])
-int main (int argc, char *argv[], char *envp[])
+
+    int main()
+    int main(int argc, char *argv[])
+    int main (int argc, char *argv[], char *envp[])
 
 -   **How does the shell use the  `PATH`  to find the programs?**
+
 The shell tries each directory in the PATH , left-to-right, and runs the first  executable program  with the matching command name that it finds. Slashes in the path name prevent the shell from using PATH to look up the command name, so the shell executes /bin/date directly.
 
 -   **How to execute another program with the  `execve`  system call?**
+
 Like all of the `exec` functions, `execve` replaces the calling process image with a new process image. This has the effect of running a new program with the process ID of the calling process. Note that a new process is not started; the new process image simply overlays the original process image. The `execve` function is most commonly used to overlay a process image that has been created by a call to the `fork` function.
+
 Prototype: int execve(const char *file, char *const argv[], char *const envp[]);
-The following example illustrates the use of `execve` to execute the `ls` shell command. Notice that the `STEPLIB` environment variable is set for the new process.
 
-  #include <sys/types.h>
-  #include <unistd.h>
-  #include <stdio.h>
+The following example illustrates the use of `execve` to execute the `ls` shell command. Notice that the `STEPLIB` environment variable is set for the new process.      
 
-  main()
-  {
-     pid_t pid;
-     char *const parmList[] = {"/bin/ls", "-l", "/u/userid/dirname", NULL};
-     char *const envParms[2] = {"STEPLIB=SASC.V6.LINKLIB", NULL};
 
-     if ((pid = fork()) ==-1)
-        perror("fork error");
-     else if (pid == 0) {
-        execve("/u/userid/bin/newShell", parmList, envParms);
-        printf("Return not expected. Must be an execve error.n");
-     }
-  }
+    #include <sys/types.h>
+    #include <unistd.h>
+    #include <stdio.h>
+    
+    int main()
+    {
+        pid_t pid;
+        char *const parmList[] = {"bin/ls", "-l", "/u/userid/dirname", NULL};
+        char *const envParms[2] = {"STEPLIB=SASC.V6.LINKLIB", NULL};
+    
+	    if ((pid = fork()) == -1)
+	        perror("fork error");
+	    else if (pid == 0)
+	    {
+	        execve("/u/userid/bin/newShell", parmList, envParms);
+	        printf("Return not expected. Must be an execve error\n");
+	    }
+    }
+
 
 -   **How to suspend the execution of a process until one of its children terminates?**
+
 A call to wait() blocks the calling process until one of its child processes exits or a signal is received. After child process terminates, parent continues its execution after wait system call instruction.
 
 -   **What is  `EOF`  / “end-of-file”?**
+
 EOF/end-of-file is a condition in a computer operating system where no more data can be read from a data source. The data source is usually called a file (computing) or stream (computing).
 
 ## Requirements
@@ -194,7 +213,7 @@ hsh main.c shell.c test_ls_2
 $
 
 ```
-## About us  
+## :rocket: About us :joystick: 
 
 This is our second group project at Holberton School !   
 We hope you enjoy our work !  
