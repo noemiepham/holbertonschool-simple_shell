@@ -1,9 +1,9 @@
-﻿# # C - Simple Shell
+# # C - Simple Shell
 In Unix System, the most generic sense of the term **shell** means any program that users employ to type commands. A shell hides the details of the underlying operating system and manages the technical details of the operating system's application programming interface, which is the level of the operating system that programs running on that operating system use.
 
-**Simple Shell is a project to handle some of those hidden features and algorithms what actually work inside a shell, and how are they executed properly after they  have been entered?**
+**#C - Simple Shell is a project to handle some of those hidden features and algorithms what actually work inside a shell, and find how are they executed properly after they  have been entered.**
 
-### General learning objectives
+## Something about Shell
 
 -   **Who designed and implemented the original Unix operating system?**
 
@@ -21,6 +21,8 @@ Ken Thompson invented the B programming language, the direct predecessor to the 
 
 Kenneth Lane Thompson (born February 4, 1943) is an American pioneer of computer science. Thompson worked at Bell Labs for most of his career where he designed and implemented the original Unix operating system. He also invented the B (programming language), the direct predecessor to the C (programming language), and was one of the creators and early developers of the Plan 9 from Bell Labs operating system. Since 2006, Thompson has worked at Google, where he co-developed the Go (programming language).
 Other notable contributions included his work on regular expression and early computer text editors QED (text editor) and ed (text editor), the definition of the UTF-8 encoding, and his work on computer chess that included the creation of endgame tablebase and the chess machine Belle (chess machine). He won the Turing Award in 1983 with his long-term colleague Dennis Ritchie.
+
+## More about Shell
 
 -   **How does a shell work?**
 
@@ -59,8 +61,6 @@ The shell tries each directory in the PATH , left-to-right, and runs the first  
 
 Like all of the `exec` functions, `execve` replaces the calling process image with a new process image. This has the effect of running a new program with the process ID of the calling process. Note that a new process is not started; the new process image simply overlays the original process image. The `execve` function is most commonly used to overlay a process image that has been created by a call to the `fork` function.
 
-Prototype: int execve(const char *file, char *const argv[], char *const envp[]);
-
 The following example illustrates the use of `execve` to execute the `ls` shell command. Notice that the `STEPLIB` environment variable is set for the new process.      
 
 
@@ -91,6 +91,11 @@ A call to wait() blocks the calling process until one of its child processes exi
 -   **What is  `EOF`  / “end-of-file”?**
 
 EOF/end-of-file is a condition in a computer operating system where no more data can be read from a data source. The data source is usually called a file (computing) or stream (computing).
+
+## How to use Shell?
+
+On a Mac or Linux machine, you can access a shell through a program called _Terminal_, which is already available on your computer. The Terminal is a window into which we will type commands. If you’re using Windows, you’ll need to download a separate program to access the shell.
+
 
 ## Requirements
 
@@ -174,7 +179,7 @@ $
 -   `wait4`  (man 2 wait4)
 -   `write`  (man 2 write)
 
-### Compilation
+## Compilation
 
 Your shell will be compiled this way:
 
@@ -213,7 +218,11 @@ hsh main.c shell.c test_ls_2
 $
 
 ```
-## :rocket: About us :joystick: 
+## Some examples
+
+
+
+## :rocket: About us  :joystick:
 
 This is our second group project at Holberton School !   
 We hope you enjoy our work !  
