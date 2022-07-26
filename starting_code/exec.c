@@ -13,9 +13,9 @@ int main(void)
 	printf("Before execve\n");
 	if (execve(argv[0], argv, NULL) == -1)
 	{
+	printf("hello\n");
 		perror("Error:");
 	}
 	printf("After execve\n");
 	return (0);
 }
-  
