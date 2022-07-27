@@ -14,25 +14,22 @@ int main(void)
     {
         printf("%d __________\n", i);
         child = fork();
-        if (child != 0)
-        {
+        if (child > 0)
+        { // parent
             wait(&stat);
         }
-        if (child == -1)
-        {
+        else if (child == -1)
+        { // negative donc fork KO
             perror("Error:");
             return (1);
         }
-        if (child == 0)
-        {
-            if (execve(argv[0], argv, NULL) == -1)
+        else if (child == 0)
+        { // cas process enfant
+            int codeRetour = execve(argv[0], argv, NULL);
+            if (codeRetour == -1)
             {
                 perror("Error:");
                 return (1);
-            }
-            else
-            {
-                execve(argv[0], argv, NULL);
             }
         }
     }
