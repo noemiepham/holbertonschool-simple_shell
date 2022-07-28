@@ -6,17 +6,17 @@
  */
 int main(void)
 {
-    ssize_t nread;
+    ssize_t line_command;
 	size_t len = 0;
     char *str = NULL;
     unsigned int i = 0;
     char **arr;
+    int pid; 
 
-    printf("$ ");
+    printf("ç ");
 
-    fork();
-	nread = getline(&str, &len, stdin);
-
+    pid = fork();
+	line_command = getline(&str, &len, stdin);
     arr = split_str(str);
     while (arr[i])
     {
