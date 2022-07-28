@@ -15,10 +15,8 @@ pid_t _fork(void)
 		if (pid == 0)
 		{
 			if (execve("/bin/ls", argv, NULL) == -1)
-			{
 				perror("Error:");
-			}
-			return (0);
 		}
 	}
+	return (0);
 }
