@@ -2,7 +2,6 @@
 
 pid_t _fork(void)
 {
-    pid_t my_pid;
 	pid_t pid;
 	int i, status;
 	char *argv[] = {"/bin/ls", "-l", "/usr/", NULL};
