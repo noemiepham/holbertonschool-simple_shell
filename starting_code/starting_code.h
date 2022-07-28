@@ -8,4 +8,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+/* Prortotypes */
+
+char **split_str(char *str);
+
 #endif
