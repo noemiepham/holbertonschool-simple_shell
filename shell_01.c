@@ -15,34 +15,38 @@ int main(void)
     int status, get;
     struct stat st;
 
-    printf("$ ");
 
+    printf("$ ");
     get = getline(&str, &len, stdin);
+
+    if (get == -1)
+	{
+		printf("Error");
+		free(str);
+		return (1);
+	}
+
     arr = split_str(str);
 
     arrcp = copyArray(arr);
-    debugArray(arrcp);
 
     while (arrcp[i])
     {
         if (stat(arrcp[i], &st) == 0)
         {
-            printf("%s FOUND\n", arrcp[i]);
             pid = fork();
             if (pid == -1)
             {
                 perror("error");
                 return (1);
             }
-            if (pid != 0)
+            else if (pid != 0)
             {
-                printf("This is parent\n");
                 wait(&status);
                 printf("$ ");
             }
-            if (pid == 0)
+            else if (pid == 0)
             {
-                printf("This is child hello\n");
                 printf("%d\n", execve(arrcp[i], arrcp, NULL));
             }
         }

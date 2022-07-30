@@ -17,5 +17,7 @@ char *_getenv(const char *name);
 
 char **split_str(char *str);
 pid_t _fork(void);
+char **copyArray(char **arrsource);
+void debugArray(char **arr);
 
 #endif
