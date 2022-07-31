@@ -24,6 +24,8 @@ char **split_str(char *str);
 pid_t _fork(void);
 char **copyArray(char **arrsource);
 void debugArray(char **arr);
+void removeCR(char **arrsource);
+int sizeArray(char **arrsource);
 int _strcmp(char *name, char *variable, unsigned int length);
 void _prompt(int fd, struct stat buf);
 void _puts(char *str);

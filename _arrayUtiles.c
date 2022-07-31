@@ -23,9 +23,10 @@ char **copyArray(char **arrsource)
 	{
 		arrDestination[j] = arrsource[j];
 		strCopy = malloc(sizeof(char) * strlen(arrsource[j]));
-		for (k = 0 ; k < strlen(arrsource[j]); k++)
+		for (k = 0; k < strlen(arrsource[j]); k++)
 		{
-			if (arrsource[j][k] != '\n') {
+			if (arrsource[j][k] != '\n')
+			{
 				strCopy[k] = arrsource[j][k];
 			}
 		}
@@ -35,3 +36,27 @@ char **copyArray(char **arrsource)
 	return (arrDestination);
 }
 
+void removeCR(char **arrsource)
+{
+	char *line = NULL;
+	int size = sizeArray(arrsource);
+	
+	if (size > 0) {
+		line = arrsource[size - 1];
+		int sizeCmd = strlen(line);
+		if (sizeCmd > 0)
+			line[sizeCmd - 1] = '\0';
+	}
+}
+
+int sizeArray(char **arrsource)
+{
+	int size = 0;
+
+	while (arrsource[size])
+	{
+		size++;
+	}
+
+	return size;
+}

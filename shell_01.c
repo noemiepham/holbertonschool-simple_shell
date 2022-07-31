@@ -26,15 +26,16 @@ int main(void)
             free(str);
             exit(EXIT_SUCCESS);
         }
-
         arr = split_str(str);
 
-        arrcp = copyArray(arr);
-        free(arr);
+        removeCR(arr);
+
+        //arrcp = copyArray(arr);
+        //free(arr);
         i = 0;
-        while (arrcp[i])
+        while (arr[i])
         {
-            if (stat(arrcp[i], &st) == 0)
+            if (stat(arr[i], &st) == 0)
             {
                 pid = fork();
                 if (pid == -1)
@@ -48,7 +49,7 @@ int main(void)
                 }
                 else if (pid == 0)
                 {
-                    if (execve(arrcp[0], arrcp, NULL) == -1)
+                    if (execve(arr[0], arr, NULL) == -1)
                     {
                         perror("Error:");
                         return (1);
@@ -57,11 +58,11 @@ int main(void)
             }
             else
             {
-                printf("%s NOT FOUND\n", arrcp[i]);
+                printf("%s NOT FOUND\n", arr[i]);
             }
             i++;
         }
-        free(arrcp);
+        free(arr);
     }
     return (0);
 }
