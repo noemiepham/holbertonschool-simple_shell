@@ -22,7 +22,6 @@ char *read_cmd(void)
 	}
 	else
 	{
-		//printf("%s", line);
 		sizeline = strlen(line);
 		line[sizeline - 1] = '\0';
 	}
