@@ -30,7 +30,6 @@ int main(void)
         arr = split_str(str);
 
         arrcp = copyArray(arr);
-        debugArray(arrcp);
           i = 0;
         while (arrcp[i])
         {
