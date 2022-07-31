@@ -26,6 +26,7 @@ char **copyArray(char **arrsource);
 void debugArray(char **arr);
 void removeCR(char **arrsource);
 int sizeArray(char **arrsource);
+void trim(char *str);
 int _strcmp(char *name, char *variable, unsigned int length);
 void _prompt(int fd, struct stat buf);
 void _puts(char *str);

@@ -37,30 +37,35 @@ char **copyArray(char **arrsource)
 }
 
 /**
- * @brief 
- * 
- * @param arrsource 
+ * @brief
+ *
+ * @param arrsource
  */
-
+/* 
 void removeCR(char **arrsource)
 {
-	char *line = NULL;
-	int sizeCmd;
+	//char *line = NULL;
+	//int sizeCmd;
 	int size = sizeArray(arrsource);
-	
-	if (size > 0) {
-		line = arrsource[size - 1];
-		sizeCmd = strlen(line);
-		if (sizeCmd > 0)
-			line[sizeCmd - 1] = '\0';
+	int i;
+
+	// if (size > 0) {
+	//	line = arrsource[size - 1];
+	//	sizeCmd = strlen(line);
+	//	if (sizeCmd > 0)
+	//		line[sizeCmd - 1] = '\0';
+	// }
+	for (i = 0; i < size; i++)
+	{
+		trim(arrsource[i]);
 	}
-}
+} */
 
 /**
- * @brief 
- * 
- * @param arrsource 
- * @return int 
+ * @brief
+ *
+ * @param arrsource
+ * @return int
  */
 int sizeArray(char **arrsource)
 {
@@ -71,4 +76,26 @@ int sizeArray(char **arrsource)
 		size++;
 	}
 	return size;
+}
+
+void trim(char *str)
+{
+	int sizeString;
+	char *ptr  = NULL;
+	char ar;
+	int i, j, k;
+
+	i = 0;
+	j = 0;
+	sizeString = strlen(str);
+	k = sizeString + 1;
+	ar = ptr[k];
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		if (str[i] != ' ' && str[i] != '\t')
+			ptr[j++] = str[i];
+	}
+	ptr[j] = '\0';
+	
+	str = &ar;
 }
