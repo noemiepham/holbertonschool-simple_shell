@@ -1,18 +1,18 @@
 #include "sshell.h"
 
 /**
-* readprompt - read the line
+* read_cmd - read the line
 * Return: line
 */
 
-char *readprompt(void)
+char *read_cmd(void)
 {
 	ssize_t nread;
 	size_t len = 0;
 	char *line = NULL;
 	int sizeline = 0;
 
-	nread = getline(&line, &len, stdin);
+	nread = getline(&line, &len, stdin); //getline allocate a buffer for us
 	if (nread == -1)
 	{
 		//got EOF (ctrl+D) problem here, solved with exit(1)!
@@ -22,7 +22,7 @@ char *readprompt(void)
 	}
 	else
 	{
-		printf("%s", line);
+		//printf("%s", line);
 		sizeline = strlen(line);
 		line[sizeline - 1] = '\0';
 	}
@@ -30,14 +30,15 @@ char *readprompt(void)
 }
 
 /**
-* format_cmd - put pointer line in cmd_args
+* split_cmd - the function to put pointer line in pointer cmd_args
 * Return: cmd_args
 */
 
-char **format_cmd(char *line)
+char **split_cmd(char *line)
 {
 	char **cmd_args;
 	char *args;
+	int position = 0;
 
 	cmd_args = malloc(1024 * (sizeof(char *)));
 	if (!cmd_args)
@@ -46,10 +47,15 @@ char **format_cmd(char *line)
 		exit(-1);
 	}
 	args = strtok(line, " ");
+	
+	while (args != NULL)
+	{
+		cmd_args[position] = args;
+		args = strtok(NULL, " ");
+		position++;
+	}
 
-	cmd_args[0] = args;
-	cmd_args[1] = NULL;
-
+	cmd_args[position] = NULL;
 	return (cmd_args);
 }
 
@@ -61,26 +67,26 @@ char **format_cmd(char *line)
 int exec_cmd(char **argv, char **args)
 {
 	pid_t pid;
-	int signal;
+	int status;
 	char *env[] = {0};
 
 	pid = fork();
 	if (pid == -1)
 	{
 		perror("Process creation error\n");
-		return (-1);
 	}
 	if (pid == 0)
 	{
-		if (!(args[0][0] == '\n'))
+		if (!(args[0][0] == '\n')) 
+		//the prompt is displayed again each time a cmd has been executed
 		{
 			if (execve(args[0], args, env) == -1)
 			{
-				perror(args[0]);
+				perror(argv[0]);
 			}
+			exit(EXIT_FAILURE);
 		}
-		return (-1);
 	}
-	wait(&signal);
+	wait(&status);
 	return (1);
 }

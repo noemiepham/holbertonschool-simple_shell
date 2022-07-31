@@ -11,8 +11,8 @@
 #include <errno.h>
 #include <signal.h>
 
-char *readprompt(void);
+char *read_cmd(void);
+char **split_cmd(char *line);
 int exec_cmd(char **argv, char **args);
-char **format_cmd(char *line);
 
 #endif
