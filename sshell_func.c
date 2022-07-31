@@ -15,16 +15,18 @@ char *readprompt(void)
 	nread = getline(&line, &len, stdin);
 	if (nread == -1)
 	{
-		//got EOF (ctrl+D) problem here
+		//got EOF (ctrl+D) problem here, solved with exit(1)!
 		printf("Error !");
-		return (line);
+		free(line);
+		exit(1);
 	}
 	else
 	{
+		printf("%s", line);
 		sizeline = strlen(line);
 		line[sizeline - 1] = '\0';
-		return (line);
 	}
+	return (line);
 }
 
 /**
