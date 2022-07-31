@@ -2,7 +2,7 @@
 /**
  * main - simple shell
  *
- * Return: 0
+ * Return:0
  */
 int main(void)
 {
@@ -16,18 +16,21 @@ int main(void)
     struct stat st;
    while (TRUE)
     {
-        printf("$ ");
+        fstat(STDIN_FILENO, &st);
+        if (S_ISCHR(st.st_mode) > 0)
+            printf("$ ");
+        
         get = getline(&str, &len, stdin);
         if (get == -1)
         {
-            printf("Error !\n");
             free(str);
-            exit (1);
+            exit (EXIT_SUCCESS);
         }
 
         arr = split_str(str);
 
         arrcp = copyArray(arr);
+        debugArray(arrcp);
           i = 0;
         while (arrcp[i])
         {
@@ -45,14 +48,11 @@ int main(void)
                 }
                 else if (pid == 0)
                 {
-                    /* printf("Before execve\n"); */
-                    printf("hello3\n");
                     if (execve(arrcp[0], arrcp, NULL) == -1)
                     {
                         perror("Error:");
                         return (1);
                     }
-                 /*    printf("%d\n", execve(arrcp[i], arrcp, NULL)); */
                 }
             }
             else
