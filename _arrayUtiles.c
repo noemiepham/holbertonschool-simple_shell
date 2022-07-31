@@ -31,6 +31,7 @@ char **copyArray(char **arrsource)
 		}
 		arrDestination[j] = strCopy;
 	}
+	free(strCopy);
 	return (arrDestination);
 }
 
