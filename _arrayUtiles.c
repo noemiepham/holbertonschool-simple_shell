@@ -41,12 +41,12 @@ char **copyArray(char **arrsource)
  *
  * @param arrsource
  */
-/* 
+
 void removeCR(char **arrsource)
 {
-	//char *line = NULL;
-	//int sizeCmd;
-	int size = sizeArray(arrsource);
+	char *line = NULL;
+	int sizeCmd;
+	int size;
 	int i;
 
 	// if (size > 0) {
@@ -55,11 +55,15 @@ void removeCR(char **arrsource)
 	//	if (sizeCmd > 0)
 	//		line[sizeCmd - 1] = '\0';
 	// }
+	size = sizeArray(arrsource);
 	for (i = 0; i < size; i++)
 	{
-		trim(arrsource[i]);
+		line = arrsource[i];
+		sizeCmd = strlen(line);
+		if (sizeCmd > 0 && line[sizeCmd] == '\n')
+			line[sizeCmd - 1] = '\0';
 	}
-} */
+}
 
 /**
  * @brief

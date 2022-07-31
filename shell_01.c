@@ -27,6 +27,8 @@ int main(void)
             exit(EXIT_SUCCESS);
         }
         arr = split_str(str);
+        removeCR(arr);
+
         i = 0;
         while (arr[i])
         {
