@@ -18,5 +18,6 @@ extern char **environ;
 
 char **split_str(char *str);
 int _strlen(char *s);
-
+void debugArray(char **arr);
+void _printev(void);
 #endif

@@ -17,7 +17,10 @@ int main(void)
     while (TRUE)
     {
         fstat(STDIN_FILENO, &st); /* check statut du clavier on met dans struct */
-        if (S_ISCHR(st.st_mode) > 0) /* test s'il n'y a pas des caractères du clavier venant du terminal, alors afficher dollar */
+        if (S_ISCHR(st.st_mode) > 0)
+            /** test s'il n'y a pas des caractères du clavier venant du terminal,
+             *alors afficher dollar
+             */
             printf("$ ");
 
         get = getline(&str, &len, stdin);
@@ -27,10 +30,20 @@ int main(void)
             exit(EXIT_SUCCESS);
         }
         arr = split_str(str);
-        
         commandPosition = 0;
         if (arr[0])
         {
+            if (strcmp(arr[0], "exit") == 0)
+            {
+                free(arr);
+                exit(1);
+            }
+            if (strcmp(arr[0], "env") == 0)
+            {
+               _printev();
+               free(arr);
+                continue;
+            }
             if (stat(arr[commandPosition], &st) == 0)
             {
                 pid = fork();
