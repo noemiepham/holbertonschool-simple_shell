@@ -10,10 +10,10 @@ int main(int argc, char **argv)
 	{
 		printf("#cisfun$ ");
 
-		cmdline = readprompt();
+		cmdline = read_cmd();
 		if (cmdline != NULL)
 		{
-			cmdargs = format_cmd(cmdline);
+			cmdargs = split_cmd(cmdline);
 			signal = exec_cmd(argv, cmdargs);
 			free(cmdargs);
 		}
