@@ -16,8 +16,8 @@ int main(void)
     struct stat st;
     while (TRUE)
     {
-        fstat(STDIN_FILENO, &st);
-        if (S_ISCHR(st.st_mode) > 0)
+        fstat(STDIN_FILENO, &st); /* check statut du clavier on met dans struct */
+        if (S_ISCHR(st.st_mode) > 0) /* test s'il n'y a pas des caractères du clavier venant du terminal, alors afficher dollar */
             printf("$ ");
 
         get = getline(&str, &len, stdin);
@@ -27,8 +27,7 @@ int main(void)
             exit(EXIT_SUCCESS);
         }
         arr = split_str(str);
-        removeCR(arr);
-
+        
         commandPosition = 0;
         if (arr[0])
         {

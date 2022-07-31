@@ -14,22 +14,9 @@ extern char **environ;
 #include <sys/types.h>
 #include <sys/wait.h>
 
-char *_which(char *command, char *fullpath, char *path);
-char *_getenv(const char *name);
-char *_getline(FILE *fp);
-
 /* Prortotypes */
 
 char **split_str(char *str);
-pid_t _fork(void);
-char **copyArray(char **arrsource);
-void debugArray(char **arr);
-void removeCR(char **arrsource);
-int sizeArray(char **arrsource);
-void trim(char *str);
-int _strcmp(char *name, char *variable, unsigned int length);
-void _prompt(int fd, struct stat buf);
-void _puts(char *str);
 int _strlen(char *s);
 
 #endif

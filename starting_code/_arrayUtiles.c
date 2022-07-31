@@ -37,8 +37,8 @@ char **copyArray(char **arrsource)
 }
 
 /**
- * @brief
- *
+ * @brief Retire retour chariot venant du getline sinon execve ne marche pas
+ * 
  * @param arrsource
  */
 
