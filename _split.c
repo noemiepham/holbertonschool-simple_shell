@@ -10,7 +10,7 @@ char **split_str(char *str)
 	char **array;
 	char *cur_word;
 	unsigned int i = 0;
-	char *sep = " ";
+	char *sep = "\n\t\r ";
 
 	
 	array = malloc(sizeof(char) * BUFFER);
