@@ -11,6 +11,7 @@ int main()
 	printf("$ ");
 
 	nread = getline(&line, &len, stdin);
+
 	char delim[] = " ";
 
 	char *ptr = strtok(line, delim);

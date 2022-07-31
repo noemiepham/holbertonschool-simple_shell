@@ -1,10 +1,8 @@
 #include "starting_code.h"
 
+extern char **environ;
 int main(void)
 {
-
-extern char **environ;
-
 int i = 0;
 while (environ[i] != NULL) {
   {

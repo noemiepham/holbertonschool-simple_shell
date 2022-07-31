@@ -10,12 +10,12 @@ int main(void)
 {
 	char *argv[] = {"/bin/ls", "-l", "/usr/", NULL};
 
-	printf("Before execve\n");
+	/* printf("Before execve\n"); */
 	if (execve(argv[0], argv, NULL) == -1)
 	{
-	printf("hello\n");
 		perror("Error:");
+		return (1);
 	}
-	printf("After execve\n");
+/* 	printf("After execve\n");  */
 	return (0);
 }
