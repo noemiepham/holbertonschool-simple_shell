@@ -14,23 +14,24 @@ int main(void)
     pid_t pid;
     int status, get;
     struct stat st;
-   while (TRUE)
+    while (TRUE)
     {
         fstat(STDIN_FILENO, &st);
         if (S_ISCHR(st.st_mode) > 0)
             printf("$ ");
-        
+
         get = getline(&str, &len, stdin);
         if (get == -1)
         {
             free(str);
-            exit (EXIT_SUCCESS);
+            exit(EXIT_SUCCESS);
         }
 
         arr = split_str(str);
 
         arrcp = copyArray(arr);
-          i = 0;
+        free(arr);
+        i = 0;
         while (arrcp[i])
         {
             if (stat(arrcp[i], &st) == 0)
@@ -60,6 +61,7 @@ int main(void)
             }
             i++;
         }
+        free(arrcp);
     }
     return (0);
 }
