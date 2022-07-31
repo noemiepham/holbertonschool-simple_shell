@@ -10,7 +10,7 @@ int main(void)
     char *str = NULL;
     size_t len = 0;
     unsigned int i;
-    char **arr, **arrcp;
+    char **arr;
     pid_t pid;
     int status, get;
     struct stat st;

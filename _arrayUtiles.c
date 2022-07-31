@@ -39,11 +39,12 @@ char **copyArray(char **arrsource)
 void removeCR(char **arrsource)
 {
 	char *line = NULL;
+	int sizeCmd;
 	int size = sizeArray(arrsource);
 	
 	if (size > 0) {
 		line = arrsource[size - 1];
-		int sizeCmd = strlen(line);
+		sizeCmd = strlen(line);
 		if (sizeCmd > 0)
 			line[sizeCmd - 1] = '\0';
 	}
