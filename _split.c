@@ -7,14 +7,13 @@
  */
 char **split_str(char *str)
 {
-	int buf = 1024;
-	char *sep = " ";
-	char *cur_word;
 	char **array;
+	char *cur_word;
 	unsigned int i = 0;
+	char *sep = " ";
 
 	
-	array = malloc(sizeof(char) * buf);
+	array = malloc(sizeof(char) * BUFFER);
 	if (array == NULL)
 		return (NULL);
 	cur_word = strtok(str, sep);
@@ -25,7 +24,6 @@ char **split_str(char *str)
 		cur_word = strtok(NULL, sep);
 		i++;
 	}
-
 	array[i] = NULL;
 	return (array);
 }
