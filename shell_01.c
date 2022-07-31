@@ -9,7 +9,7 @@ int main(void)
 
     char *str = NULL;
     size_t len = 0;
-    unsigned int i;
+    unsigned int commandPosition;
     char **arr;
     pid_t pid;
     int status, get;
@@ -29,10 +29,10 @@ int main(void)
         arr = split_str(str);
         removeCR(arr);
 
-        i = 0;
-        while (arr[i])
+        commandPosition = 0;
+        if (arr[0])
         {
-            if (stat(arr[i], &st) == 0)
+            if (stat(arr[commandPosition], &st) == 0)
             {
                 pid = fork();
                 if (pid == -1)
@@ -46,7 +46,7 @@ int main(void)
                 }
                 else if (pid == 0)
                 {
-                    if (execve(arr[0], arr, NULL) == -1)
+                    if (execve(arr[commandPosition], arr, NULL) == -1)
                     {
                         perror("Error:");
                         return (1);
@@ -55,9 +55,8 @@ int main(void)
             }
             else
             {
-                printf("%s NOT FOUND\n", arr[i]);
+                printf("%s NOT FOUND\n", arr[commandPosition]);
             }
-            i++;
         }
         free(arr);
     }
