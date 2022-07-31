@@ -30,5 +30,6 @@ void trim(char *str);
 int _strcmp(char *name, char *variable, unsigned int length);
 void _prompt(int fd, struct stat buf);
 void _puts(char *str);
+int _strlen(char *s);
 
 #endif

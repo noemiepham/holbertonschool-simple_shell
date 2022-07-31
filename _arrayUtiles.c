@@ -85,7 +85,7 @@ void trim(char *str)
 
 	i = 0;
 	j = 0;
-	sizeString = strlen(str);
+	sizeString = _strlen(str);
 	k = sizeString + 1;
 	ar = ptr[k];
 	for (i = 0; str[i] != '\0'; i++)
