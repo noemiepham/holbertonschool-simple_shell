@@ -49,12 +49,6 @@ void removeCR(char **arrsource)
 	int size;
 	int i;
 
-	// if (size > 0) {
-	//	line = arrsource[size - 1];
-	//	sizeCmd = strlen(line);
-	//	if (sizeCmd > 0)
-	//		line[sizeCmd - 1] = '\0';
-	// }
 	size = sizeArray(arrsource);
 	for (i = 0; i < size; i++)
 	{
