@@ -29,9 +29,7 @@ int main(void)
         arr = split_str(str);
 
         removeCR(arr);
-
-        //arrcp = copyArray(arr);
-        //free(arr);
+        
         i = 0;
         while (arr[i])
         {

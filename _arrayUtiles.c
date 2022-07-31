@@ -36,6 +36,12 @@ char **copyArray(char **arrsource)
 	return (arrDestination);
 }
 
+/**
+ * @brief 
+ * 
+ * @param arrsource 
+ */
+
 void removeCR(char **arrsource)
 {
 	char *line = NULL;
@@ -50,6 +56,12 @@ void removeCR(char **arrsource)
 	}
 }
 
+/**
+ * @brief 
+ * 
+ * @param arrsource 
+ * @return int 
+ */
 int sizeArray(char **arrsource)
 {
 	int size = 0;
@@ -58,6 +70,5 @@ int sizeArray(char **arrsource)
 	{
 		size++;
 	}
-
 	return size;
 }
