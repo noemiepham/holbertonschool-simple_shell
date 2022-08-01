@@ -38,6 +38,7 @@ char **split_cmd(char *line)
 	char **cmd_args;
 	char *args;
 	int position = 0;
+	char *delim = "\n\t\r ";
 
 	cmd_args = malloc(1024 * (sizeof(char *)));
 	if (!cmd_args)
@@ -45,12 +46,12 @@ char **split_cmd(char *line)
 		perror("Error of allocation of cmd_args\n");
 		exit(-1);
 	}
-	args = strtok(line, " ");
+	args = strtok(line, delim);
 	
 	while (args != NULL)
 	{
 		cmd_args[position] = args;
-		args = strtok(NULL, " ");
+		args = strtok(NULL, delim);
 		position++;
 	}
 	cmd_args[position] = NULL;
