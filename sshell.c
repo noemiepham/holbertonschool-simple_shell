@@ -1,13 +1,16 @@
 #include "sshell.h"
 
-int main(int argc, char **argv)
+int main(int __attribute__((__unused__)) argc, char **argv)
 {
 	char *cmdline;
 	char **cmdargs;
 	int signal = 1;
 
-	while (signal == 1 && argc >= 1)
+	while (signal == 1)
 	{
+		signal = isatty(0);
+		
+		if (signal == 1)
 		printf("#cisfun$ ");
 
 		cmdline = read_cmd();
