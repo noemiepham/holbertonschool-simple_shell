@@ -55,6 +55,7 @@ char **split_cmd(char *line)
 		position++;
 	}
 	cmd_args[position] = NULL;
+	free(args);
 	return (cmd_args);
 }
 
