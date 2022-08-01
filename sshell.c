@@ -16,6 +16,10 @@ int main(int __attribute__((__unused__)) argc, char **argv)
 		cmdline = read_cmd();
 		if (cmdline != NULL)
 		{
+			/*implement the exit buit-in, that exits the shell*/
+			if (!strcmp(cmdline, "exit"))
+				return (1);
+
 			cmdargs = split_cmd(cmdline);
 			signal = exec_cmd(argv, cmdargs);
 			free(cmdargs);
