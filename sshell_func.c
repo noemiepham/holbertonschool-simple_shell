@@ -12,18 +12,17 @@ char *read_cmd(void)
 	char *line = NULL;
 	int sizeline = 0;
 
-	nread = getline(&line, &len, stdin); //getline allocate a buffer for us
+	nread = getline(&line, &len, stdin); /*getline allocate a buffer for us*/
 	if (nread == -1)
 	{
-		//got EOF (ctrl+D) problem here, solved with exit(1)!
-		printf("Error !");
+		/*got EOF (ctrl+D) problem here, solved with exit(1)!*/
 		free(line);
-		exit(1);
+		exit(EXIT_SUCCESS);
 	}
 	else
 	{
 		sizeline = strlen(line);
-		line[sizeline - 1] = '\0';
+		line[sizeline - 1] = '\0'; /*avoid getline return to newline*/
 	}
 	return (line);
 }
@@ -46,7 +45,7 @@ char **split_cmd(char *line)
 		exit(-1);
 	}
 	args = strtok(line, " ");
-	
+
 	while (args != NULL)
 	{
 		cmd_args[position] = args;
@@ -70,21 +69,22 @@ int exec_cmd(char **argv, char **args)
 	char *env[] = {0};
 
 	pid = fork();
-	if (pid == -1)
+	if (pid < 0)
 	{
 		perror("Process creation error\n");
+		return (-1);
 	}
 	if (pid == 0)
 	{
+		/*the prompt is displayed again each time a cmd has been executed*/
 		if (!(args[0][0] == '\n')) 
-		//the prompt is displayed again each time a cmd has been executed
 		{
 			if (execve(args[0], args, env) == -1)
 			{
 				perror(argv[0]);
 			}
-			exit(EXIT_FAILURE);
 		}
+		return (-1);
 	}
 	wait(&status);
 	return (1);
