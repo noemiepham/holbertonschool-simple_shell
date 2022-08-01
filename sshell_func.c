@@ -81,14 +81,11 @@ int exec_cmd(char **argv, char **args)
 		if (pid == 0)
 		{
 			/*the prompt is displayed again each time a cmd has been executed*/
-			if (!(args[0][0] == '\n')) 
+			if (execve(args[0], args, env) == -1)
 			{
-				if (execve(args[0], args, env) == -1)
-				{
-					perror(argv[0]);
-				}
+				perror(argv[0]);
 				exit(EXIT_FAILURE);
-			}	
+			}
 		}
 		wait(&status);
 	}
