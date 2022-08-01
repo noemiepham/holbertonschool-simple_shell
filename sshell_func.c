@@ -47,6 +47,13 @@ char **split_cmd(char *line)
 		exit(-1);
 	}
 	args = strtok(line, delim);
+
+	if (!strcmp(args, "exit"))
+		exit(0);
+	
+
+	if (!strcmp(args, "env"))
+		_printenv();
 	
 	while (args != NULL)
 	{
