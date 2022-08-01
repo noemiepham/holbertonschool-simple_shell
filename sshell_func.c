@@ -12,7 +12,6 @@ char *read_cmd(void)
 	char *line = NULL;
 	int sizeline = 0;
 
-	line = malloc(len * sizeof(char)); /*allocate memory for the getline()*/
 	nread = getline(&line, &len, stdin); 
 	if (nread == -1)
 	{
@@ -94,6 +93,11 @@ int exec_cmd(char **argv, char **args)
 	}
 	return (1);
 }
+
+/**
+* printenv - print environment
+* Return: 0
+*/
 
 int _printenv(void)
 {
