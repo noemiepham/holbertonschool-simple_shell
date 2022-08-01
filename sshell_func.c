@@ -12,12 +12,13 @@ char *read_cmd(void)
 	char *line = NULL;
 	int sizeline = 0;
 
-	nread = getline(&line, &len, stdin); /*getline allocate a buffer for us*/
+	line = malloc(len * sizeof(char)); /*allocate memory for the getline()*/
+	nread = getline(&line, &len, stdin); 
 	if (nread == -1)
 	{
 		/*got EOF (ctrl+D) problem here, solved with exit(1)!*/
 		free(line);
-		line = 0;
+		line = NULL;
 		exit(EXIT_SUCCESS);
 	}
 	else
@@ -73,7 +74,7 @@ int exec_cmd(char **argv, char **args)
 	if (stat(argv[0], &filestat) == 0)
 	{
 		pid = fork();
-		if (pid == -1)
+		if (pid < 0)
 		{
 			perror("Process creation error\n");
 		}
