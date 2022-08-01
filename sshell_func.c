@@ -48,9 +48,6 @@ char **split_cmd(char *line)
 	}
 	args = strtok(line, delim);
 
-	if (!strcmp(args, "env"))
-		_printenv();
-	
 	while (args != NULL)
 	{
 		cmd_args[position] = args;
@@ -70,11 +67,9 @@ char **split_cmd(char *line)
 		else
 		{
 			free(cmd_args);
-			exit(0);
+			exit(1);
 		}
-
 	}
-
 	free(args);
 	return (cmd_args);
 }
