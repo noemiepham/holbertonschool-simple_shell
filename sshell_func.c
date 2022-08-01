@@ -49,7 +49,11 @@ char **split_cmd(char *line)
 	args = strtok(line, delim);
 
 	if (!strcmp(args, "exit"))
+	{
+		free(args);
+		free(cmd_args);
 		exit(0);
+	}
 	
 
 	if (!strcmp(args, "env"))
