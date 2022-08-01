@@ -48,14 +48,6 @@ char **split_cmd(char *line)
 	}
 	args = strtok(line, delim);
 
-	if (!strcmp(args, "exit"))
-	{
-		free(args);
-		free(cmd_args);
-		exit(0);
-	}
-	
-
 	if (!strcmp(args, "env"))
 		_printenv();
 	
@@ -66,6 +58,17 @@ char **split_cmd(char *line)
 		position++;
 	}
 	cmd_args[position] = NULL;
+
+	if (!strcmp(cmd_args[0], "exit"))
+	{
+		free(args);
+		free(cmd_args);
+		if (cmd_args[1] != NULL)
+			exit(2);
+		else
+			exit(0);
+	}
+
 	free(args);
 	return (cmd_args);
 }
