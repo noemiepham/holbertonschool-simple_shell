@@ -93,3 +93,15 @@ int exec_cmd(char **argv, char **args)
 	}
 	return (1);
 }
+
+int _printenv(void)
+{
+	int i = 0;
+	
+	while (environ[i] != NULL)
+	{
+		printf("%s\n", environ[i]);
+		i++;
+	}
+	return (0);
+}
