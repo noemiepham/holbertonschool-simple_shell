@@ -62,11 +62,17 @@ char **split_cmd(char *line)
 	if (!strcmp(cmd_args[0], "exit"))
 	{
 		free(args);
-		free(cmd_args);
 		if (cmd_args[1] != NULL)
+		{
+			free(cmd_args);
 			exit(2);
+		}
 		else
+		{
+			free(cmd_args);
 			exit(0);
+		}
+
 	}
 
 	free(args);
