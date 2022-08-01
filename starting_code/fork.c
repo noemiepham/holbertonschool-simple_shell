@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
 /**
  * main - fork example
@@ -10,17 +11,23 @@ int main(void)
 {
 	pid_t my_pid;
 	pid_t pid;
-
-	printf("Before fork\n");
-	pid = fork();
-	if (pid == -1)
+	int i, status;
+	char *argv[] = {"/bin/ls", "-l", "/usr/", NULL};
+	for (i = 0; i < 5; i++)
 	{
-		perror("Error:");
-		return (1);
+		if (pid != 0)
+		{
+			pid = fork();
+			wait(&status);
+		}
+		if (pid == 0)
+		{
+			if (execve("/bin/ls", argv, NULL) == -1)
+			{
+				perror("Error:");
+			}
+			return (0);
+		}
 	}
-	printf("After fork\n");
-	my_pid = getpid();
-	printf("My pid is %u\n", my_pid);
 	return (0);
 }
- 

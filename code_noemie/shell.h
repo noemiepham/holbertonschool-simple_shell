@@ -1,6 +1,10 @@
 #ifndef starting_code_h
 #define starting_code_h
 
+#define TRUE 1
+#define BUFFER 1024
+#define PROMPT "$ "
+extern char **environ;
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,12 +14,10 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-char *_which(char *command, char *fullpath, char *path);
-char *_getenv(const char *name);
-
 /* Prortotypes */
 
 char **split_str(char *str);
-pid_t _fork(void);
-
+int _strlen(char *s);
+void debugArray(char **arr);
+void _printev(void);
 #endif
