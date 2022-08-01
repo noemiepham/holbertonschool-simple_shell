@@ -18,7 +18,7 @@ int main(int __attribute__((__unused__)) argc, char **argv)
 		{
 			cmdargs = split_cmd(cmdline);
 			signal = exec_cmd(argv, cmdargs);
-			free(cmdargs);
+/*			free(cmdargs);*/
 		}
 		else
 		{
