@@ -1,18 +1,15 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/wait.h>
-
+#include "shell.h"
 /**
- * main - fork example
+ * _fork - processor
  *
- * Return: Always 0.
+ * Return: Sucesse
  */
-int main(void)
+pid_t _fork(void)
 {
-	pid_t my_pid;
 	pid_t pid;
 	int i, status;
 	char *argv[] = {"/bin/ls", "-l", "/usr/", NULL};
+
 	for (i = 0; i < 5; i++)
 	{
 		if (pid != 0)
@@ -23,10 +20,7 @@ int main(void)
 		if (pid == 0)
 		{
 			if (execve("/bin/ls", argv, NULL) == -1)
-			{
 				perror("Error:");
-			}
-			return (0);
 		}
 	}
 	return (0);
