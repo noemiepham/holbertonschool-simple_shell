@@ -66,24 +66,28 @@ int exec_cmd(char **argv, char **args)
 	pid_t pid;
 	int status;
 	char *env[] = {0};
+	struct stat filestat;
 
-	pid = fork();
-	if (pid == -1)
+	if (stat(argv[0], &filestat) == 0)
 	{
-		perror("Process creation error\n");
-	}
-	if (pid == 0)
-	{
-		/*the prompt is displayed again each time a cmd has been executed*/
-		if (!(args[0][0] == '\n')) 
+		pid = fork();
+		if (pid == -1)
 		{
-			if (execve(args[0], args, env) == -1)
-			{
-				perror(argv[0]);
-			}
-			exit(EXIT_FAILURE);
+			perror("Process creation error\n");
 		}
+		if (pid == 0)
+		{
+			/*the prompt is displayed again each time a cmd has been executed*/
+			if (!(args[0][0] == '\n')) 
+			{
+				if (execve(args[0], args, env) == -1)
+				{
+					perror(argv[0]);
+				}
+				exit(EXIT_FAILURE);
+			}	
+		}
+		wait(&status);
 	}
-	wait(&status);
 	return (1);
 }
