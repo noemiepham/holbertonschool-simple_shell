@@ -52,8 +52,10 @@ char **split_cmd(char *line)
 		args = strtok(NULL, " ");
 		position++;
 	}
+	free(args);
 
 	cmd_args[position] = NULL;
+	free(cmd_args);
 	return (cmd_args);
 }
 
