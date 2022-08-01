@@ -12,11 +12,10 @@ char *read_cmd(void)
 	char *line = NULL;
 	int sizeline = 0;
 
-	nread = getline(&line, &len, stdin); //getline allocate a buffer for us
+	nread = getline(&line, &len, stdin); /*getline allocate a buffer for us*/
 	if (nread == -1)
 	{
-		//got EOF (ctrl+D) problem here, solved with exit(1)!
-		printf("Error !");
+		/*got EOF (ctrl+D) problem here, solved with exit(1)!*/
 		free(line);
 		exit(1);
 	}
@@ -76,8 +75,8 @@ int exec_cmd(char **argv, char **args)
 	}
 	if (pid == 0)
 	{
+		/*the prompt is displayed again each time a cmd has been executed*/
 		if (!(args[0][0] == '\n')) 
-		//the prompt is displayed again each time a cmd has been executed
 		{
 			if (execve(args[0], args, env) == -1)
 			{

@@ -6,7 +6,7 @@ int main(int argc, char **argv)
 	char **cmdargs;
 	int signal = 1;
 
-	while (signal == 1)
+	while (signal == 1 && argc >= 1)
 	{
 		printf("#cisfun$ ");
 
