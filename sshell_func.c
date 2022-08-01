@@ -17,6 +17,7 @@ char *read_cmd(void)
 	{
 		/*got EOF (ctrl+D) problem here, solved with exit(1)!*/
 		free(line);
+		line = 0;
 		exit(EXIT_SUCCESS);
 	}
 	else

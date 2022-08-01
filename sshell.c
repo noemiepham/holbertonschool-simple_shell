@@ -19,12 +19,14 @@ int main(int __attribute__((__unused__)) argc, char **argv)
 			cmdargs = split_cmd(cmdline);
 			signal = exec_cmd(argv, cmdargs);
 			free(cmdargs);
+			cmdargs = NULL;
 		}
 		else
 		{
 			printf("detected NULL cmd\n");
 		}
 		free(cmdline);
+		cmdline = NULL;
 	}
 	return (0);
 }
