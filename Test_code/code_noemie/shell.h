@@ -20,4 +20,5 @@ char **split_str(char *str);
 int _strlen(char *s);
 void debugArray(char **arr);
 void _printev(void);
+void get_absolute_path(char **cmd);
 #endif
