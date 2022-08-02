@@ -1,6 +1,7 @@
 #include "sshell.h"
 
 int main(int __attribute__((__unused__)) argc, char **argv)
+
 {
 	char *cmdline;
 	char **cmdargs;
@@ -22,6 +23,14 @@ int main(int __attribute__((__unused__)) argc, char **argv)
 			if (!strcmp(cmdline, "env"))
 				_printenv();
 		*/
+
+	while (signal == 1 && argc >= 1)
+	{
+		printf("#cisfun$ ");
+		cmdline = read_cmd();
+		if (cmdline != NULL)
+		{
+
 			cmdargs = split_cmd(cmdline);
 			signal = exec_cmd(argv, cmdargs);
 			free(cmdargs);

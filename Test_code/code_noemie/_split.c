@@ -27,3 +27,4 @@ char **split_str(char *str)
 	array[i] = NULL;
 	return (array);
 }
+

@@ -12,18 +12,23 @@ char *read_cmd(void)
 	char *line = NULL;
 	int sizeline = 0;
 
-	nread = getline(&line, &len, stdin); 
+
+	nread = getline(&line, &len, stdin); /*getline allocate a buffer for us*/
+
 	if (nread == -1)
 	{
 		/*got EOF (ctrl+D) problem here, solved with exit(1)!*/
 		free(line);
-		line = NULL;
 		exit(EXIT_SUCCESS);
 	}
 	else
 	{
 		sizeline = strlen(line);
+
 		line[sizeline - 1] = '\0';
+
+		line[sizeline - 1] = '\0'; /*avoid getline return to newline*/
+
 	}
 	return (line);
 }
@@ -38,14 +43,16 @@ char **split_cmd(char *line)
 	char **cmd_args;
 	char *args;
 	int position = 0;
+
 	char *delim = "\n\t\r ";
+=
 
 	cmd_args = malloc(1024 * (sizeof(char *)));
 	if (!cmd_args)
 	{
 		perror("Error of allocation of cmd_args\n");
 		exit(-1);
-	}
+
 	args = strtok(line, delim);
 
 	while (args != NULL)
@@ -56,6 +63,7 @@ char **split_cmd(char *line)
 	}
 	cmd_args[position] = NULL;
 
+<<<<<<< HEAD:sshell_func.c
 	if (!strcmp(cmd_args[0], "exit"))
 	{
 		free(args);
@@ -71,6 +79,19 @@ char **split_cmd(char *line)
 		}
 	}
 	free(args);
+=======
+	args = strtok(line, " ");
+
+	while (args != NULL)
+	{
+		cmd_args[position] = args;
+		args = strtok(NULL, " ");
+		position++;
+	}
+
+	cmd_args[position] = NULL;
+
+>>>>>>> dc280cfc5af42c547c198dd8caf1c93b84beb49f:Test_code/code_mia/sshell_func.c
 	return (cmd_args);
 }
 
@@ -84,6 +105,7 @@ int exec_cmd(char **argv, char **args)
 	pid_t pid;
 	int status;
 	char *env[] = {0};
+
 	struct stat filestat;
 
 	if (stat(argv[0], &filestat) == 0)
@@ -96,14 +118,11 @@ int exec_cmd(char **argv, char **args)
 		if (pid == 0)
 		{
 			/*the prompt is displayed again each time a cmd has been executed*/
-			if (!(args[0][0] == '\n')) 
+			if (execve(args[0], args, env) == -1)
 			{
-				if (execve(args[0], args, env) == -1)
-				{
-					perror(argv[0]);
-				}
+				perror(argv[0]);
 				exit(EXIT_FAILURE);
-			}	
+			}
 		}
 		wait(&status);
 	}
@@ -126,3 +145,25 @@ int _printenv(void)
 	}
 	return (0);
 }
+pid = fork();
+	if (pid < 0)
+	{
+		perror("Process creation error\n");
+		return (-1);
+	}
+	if (pid == 0)
+	{
+		/*the prompt is displayed again each time a cmd has been executed*/
+		if (!(args[0][0] == '\n')) 
+		{
+			if (execve(args[0], args, env) == -1)
+			{
+				perror(argv[0]);
+			}
+		}
+		return (-1);
+	}
+	wait(&status);
+	return (1);
+}
+
