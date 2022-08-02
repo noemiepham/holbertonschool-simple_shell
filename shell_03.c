@@ -13,15 +13,14 @@ int main(void)
     char **arr;
     pid_t pid;
     int status, get;
+    int signal = 1;
     struct stat st;
-    while (TRUE)
+    while (signal == 1)
     {
-        fstat(STDIN_FILENO, &st); /* check statut du clavier on met dans struct */
-        if (S_ISCHR(st.st_mode) > 0)
-            /** test s'il n'y a pas des caractères du clavier venant du terminal,
-             *alors afficher dollar
-             */
-            printf("$ ");
+       signal = isatty(0);
+		
+		if (signal == 1)
+		printf("$ ");
 
         get = getline(&str, &len, stdin);
         if (get == -1)
