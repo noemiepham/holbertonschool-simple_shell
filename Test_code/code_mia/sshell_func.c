@@ -54,7 +54,7 @@ char **split_cmd(char *line)
 		exit(-1);
 
 	args = strtok(line, delim);
-	
+
 	while (args != NULL)
 	{
 		cmd_args[position] = args;
@@ -63,6 +63,23 @@ char **split_cmd(char *line)
 	}
 	cmd_args[position] = NULL;
 
+<<<<<<< HEAD:sshell_func.c
+	if (!strcmp(cmd_args[0], "exit"))
+	{
+		free(args);
+		if (cmd_args[1] != NULL)
+		{
+			free(cmd_args);
+			exit(2);
+		}
+		else
+		{
+			free(cmd_args);
+			exit(1);
+		}
+	}
+	free(args);
+=======
 	args = strtok(line, " ");
 
 	while (args != NULL)
@@ -74,6 +91,7 @@ char **split_cmd(char *line)
 
 	cmd_args[position] = NULL;
 
+>>>>>>> dc280cfc5af42c547c198dd8caf1c93b84beb49f:Test_code/code_mia/sshell_func.c
 	return (cmd_args);
 }
 

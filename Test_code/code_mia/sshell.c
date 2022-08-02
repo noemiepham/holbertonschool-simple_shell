@@ -19,7 +19,7 @@ int main(int __attribute__((__unused__)) argc, char **argv)
 		{
 			/*implement the exit buit-in, that exits the shell*/
 		/*	if (!strcmp(cmdline, "exit"))
-				return (1);
+				return (0);
 			if (!strcmp(cmdline, "env"))
 				_printenv();
 		*/
