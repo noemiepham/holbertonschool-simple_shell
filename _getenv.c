@@ -32,7 +32,6 @@ char *_getenv(const char *name)
             envValue = envName;
         }
         i++;
-    printf("%d %s\n", i, envValue);
     }
     return (NULL);
 }
