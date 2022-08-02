@@ -29,10 +29,10 @@ void get_absolute_path(char **cmd)
 		path = NULL;
 
 		/* Boucle sur chaque dossier du path pour trouver le binaire */
-		for (int i = 0; path_split[i]i != NULL; i++)
+		for (int i = 0; path_split[i] != NULL; i++)
 		{
 			/* malloc len du path + '/' + len du binaire + 1 pour le '\0' */
-			bin = malloc(sizeof(char + strlen(path_split[i]) + 1 + strlen(cmd[0]) + 1));
+			bin = malloc(sizeof(char) + strlen(path_split[i]) + 1 + strlen(cmd[0]) + 1);
 			if (bin == NULL)
 				break;
 
