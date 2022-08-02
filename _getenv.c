@@ -37,8 +37,8 @@ char *_getenv(const char *name)
     return (NULL);
 }
 
-int main(void)
+/* int main(void)
 {
     printf("%s\n", _getenv("PATH"));
     return (0);
-}
+} */
