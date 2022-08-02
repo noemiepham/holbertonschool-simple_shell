@@ -35,7 +35,7 @@ int main(void)
             if (strcmp(arr[0], "exit") == 0)
             {
                 free(arr);
-                exit(0);
+                exit(EXIT_SUCCESS);
             }
             if (strcmp(arr[0], "env") == 0)
             {
