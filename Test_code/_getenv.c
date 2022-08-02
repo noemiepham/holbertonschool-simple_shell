@@ -1,6 +1,4 @@
-
-#include "shell.h"
-/**
+/*
  * _getenv - get environ
  * @name: name de environ
  * Return: environ value
@@ -11,6 +9,10 @@ char *_getenv(const char *name)
     int i = 0;
     char *envName;
     char *envValue;
+    char *command;
+    char *array;
+    char *cur_word;
+    char sep[] = ":";
 
     while (environ[i])
     {
@@ -22,22 +24,21 @@ char *_getenv(const char *name)
         }
         i++;
     }
-    i = 0;
-    while (envValue[i])
+    cur_word = strtok(envValue, sep);
+
+    while (cur_word != NULL)
     {
-        envName = strtok(&envValue[i], ":");
-        if (strcmp(envName, name) == 0)
-        {
-            envName = strtok(NULL, ":");
-            envValue = envName;
-        }
-        i++;
+        cur_word = strtok(NULL, sep);
+        printf("%s\n", cur_word);
     }
-    return (NULL);
+    array = split_str(cur_word);
+
+        return (cur_word);
 }
 
-/* int main(void)
+ int main(void)
 {
     printf("%s\n", _getenv("PATH"));
     return (0);
-} */
+}
+ 

@@ -10,9 +10,9 @@ char **split_str(char *str)
 	char **array;
 	char *cur_word;
 	unsigned int i = 0;
-
 	char *sep = "\n\t\r ";
 
+	
 	array = malloc(sizeof(char) * BUFFER);
 	if (array == NULL)
 		return (NULL);
@@ -27,7 +27,6 @@ char **split_str(char *str)
 	array[i] = NULL;
 	return (array);
 }
-
 /**
 * _strlen - length of string;
 * @s : pointer
@@ -52,7 +51,6 @@ return (strlen);
 void debugArray(char **arr)
 {
 	unsigned int i = 0;
-
 	if (arr != NULL)
 	{
 		while (arr[i] != NULL)

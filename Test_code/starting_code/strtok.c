@@ -12,7 +12,7 @@ int main()
 
 	nread = getline(&line, &len, stdin);
 
-	char delim[] = " ";
+	char delim[] = ":";
 
 	char *ptr = strtok(line, delim);
 
