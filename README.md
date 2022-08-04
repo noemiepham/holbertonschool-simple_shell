@@ -230,28 +230,28 @@ $
     
     int main(int argc, char **argv)
     {
-		   pid_t my_pid;
-		   int status;
-		   char *args[] = {"/bin/ls", "-l", 0};
-		   char *env[] = {0};
+	   pid_t my_pid;
+	   int status;
+	   char *args[] = {"/bin/ls", "-l", 0};
+	   char *env[] = {0};
 		   		   
-		   my_pid = fork();
-		   if (my_pid == -1)
-		   {
-			   perror("fork fails");
-			   return (1);
+	   my_pid = fork();
+	   if (my_pid == -1)
+	   {
+		   perror("fork fails");
+		   return (1);
+	   }
+	   if (child == 0)
+	   {
+		    if (execve("/bin/ls", args, env) == -1)
+	            {
+			    perror("Error");
+			    return (1);
 		    }
-		    if (child == 0)
-		    {
-				    if (execve("/bin/ls", args, env) == -1)
-				    {
-						    perror("Error");
-						    return (1);
-					}
-			}
-			wait(&status);
-			return (0);
-		}
+	   }
+	   wait(&status);
+	   return (0);
+	}
 
 ## :rocket: About us  :joystick:
 
