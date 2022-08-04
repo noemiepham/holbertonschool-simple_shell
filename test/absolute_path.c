@@ -25,7 +25,7 @@ void get_absolute_path(char **cmd)
 	if (cmd[0][0] != '/' && strncmp(cmd[0], "./", 2) != 0)
 	{
 		/* On split le path pour verifier ou ce trouve le binaire */
-		path_split = split_str(path);
+		path_split = split_str(path, ":");
 		free(path);
 		path = NULL;
 
