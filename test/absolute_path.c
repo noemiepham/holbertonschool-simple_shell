@@ -1,4 +1,4 @@
-#include "shell.h"
+ #include "shell.h" 
 #include "string.h"
 
 /**
@@ -13,6 +13,7 @@ void get_absolute_path(char **cmd)
 	char *path = strdup(getenv("PATH"));
 	char *bin = NULL;
 	char **path_split = NULL;
+	int i;
 
 	if (path == NULL) /* si le path est null, on cree un path */
 		path = strdup("/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin");
@@ -29,7 +30,7 @@ void get_absolute_path(char **cmd)
 		path = NULL;
 
 		/* Boucle sur chaque dossier du path pour trouver le binaire */
-		for (int i = 0; path_split[i] != NULL; i++)
+		for (i = 0; path_split[i] != NULL; i++)
 		{
 			/* malloc len du path + '/' + len du binaire + 1 pour le '\0' */
 			bin = malloc(sizeof(char) + strlen(path_split[i]) + 1 + strlen(cmd[0]) + 1);

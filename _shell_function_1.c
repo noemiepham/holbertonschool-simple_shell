@@ -5,17 +5,18 @@
  * @str: string array
  * Return: new array
  */
-char **split_str(char *str)
+char **split_str(char *str, char *sep)
 {
 	char **array;
 	char *cur_word;
 	unsigned int i = 0;
-	char *sep = "\n\t\r ";
+	
 
 	
 	array = malloc(sizeof(char) * BUFFER);
 	if (array == NULL)
 		return (NULL);
+		
 	cur_word = strtok(str, sep);
 
 	while (cur_word != NULL)

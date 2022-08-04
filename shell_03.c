@@ -7,69 +7,67 @@
 int main(void)
 {
 
-    char *str = NULL;
-    size_t len = 0;
-    unsigned int commandPosition;
-    char **arr;
-    pid_t pid;
-    int status, get;
-    int signal = 1;
-    struct stat st;
-    while (signal == 1)
-    {
-       signal = isatty(0);
-		
-		if (signal == 1)
-		printf("$ ");
+	char *str = NULL;
+	size_t len = 0;
+	char **command, **envPath;
+	int get, j, status_exec;
+	int signal = 1;
+	struct stat st;
+	char *fullPathCommand;
+	char *sep = "\n\t\r ";
 
-        get = getline(&str, &len, stdin);
-        if (get == -1)
-        {
-            free(str);
-            exit(EXIT_SUCCESS);
-        }
-        arr = split_str(str);
-        commandPosition = 0;
-        if (arr[0])
-        {
-            if (strcmp(arr[0], "exit") == 0)
-            {
-                free(arr);
-                exit(EXIT_SUCCESS);
-            }
-            if (strcmp(arr[0], "env") == 0)
-            {
-               _printev();
-               free(arr);
-                continue;
-            }
-            if (stat(arr[commandPosition], &st) == 0)
-            {
-                pid = fork();
-                if (pid == -1)
-                {
-                    perror("error");
-                    return (1);
-                }
-                else if (pid != 0)
-                {
-                    wait(&status);
-                }
-                else if (pid == 0)
-                {
-                    if (execve(arr[commandPosition], arr, NULL) == -1)
-                    {
-                        perror("Error:");
-                        return (1);
-                    }
-                }
-            }
-            else
-            {
-                printf("%s NOT FOUND\n", arr[commandPosition]);
-            }
-        }
-        free(arr);
-    }
-    return (0);
+	while (signal == 1)
+	{
+		signal = isatty(0);
+
+		if (signal == 1)
+			printf("$ ");
+
+		get = getline(&str, &len, stdin);
+		if (get == -1)
+		{
+			free(str);
+			exit(EXIT_SUCCESS);
+		}
+		command = split_str(str, sep);
+		if (command[0])
+		{
+			if (strcmp(command[0], "exit") == 0)
+			{
+				free(command);
+				exit(EXIT_SUCCESS);
+			}
+			if (strcmp(command[0], "env") == 0)
+			{
+				_printev();
+				free(command);
+				continue;
+			}
+			if (stat(command[0], &st) == 0)
+			{
+				status_exec = execute_command(command[0], command);
+			}
+			else
+			{
+				envPath = _getenv("PATH");
+
+				for (j = 0; envPath[j] != NULL; j++)
+				{
+					fullPathCommand = envPath[j];
+
+					strcat(fullPathCommand, "/");
+					strcat(fullPathCommand, command[0]);
+
+					if (stat(fullPathCommand, &st) == 0)
+					{
+						status_exec = execute_command(fullPathCommand, command);
+					}
+				}
+				if (status_exec == 1)
+					printf("%s NOT FOUND\n", command[0]);
+			}
+		}
+	}
+	free(command);
+	return (0);
 }
