@@ -26,11 +26,7 @@ Other notable contributions included his work on regular expression and early co
 
 -   **How does a shell work?**
 
-<<<<<<< HEAD
-A shell is a program that acts as an interpreter which passes commands inputs entered by a user that are then executed by the operating system. The shell runs in a sort of infinite _loop of different functions (i.e. reading typed command, format the command, manage exceptions and execute)_ until the next command is entered.
-=======
 The shell is your interface to the operating system. It acts as a command interpreter; it takes each command and passes it to the operating system.  It then displays the results of this operation on your screen. There are several shells in widespread use.
->>>>>>> 5bab9fb9bea7d63b6ef07bdc92cf35749dea64ca
 
 -   **What is a pid and a ppid?**
 
@@ -53,15 +49,9 @@ By calling fork (). A new process can then be created. By copying the addresses 
 
 -   **What are the three prototypes of  `main`?**
 
-<<<<<<< HEAD
-    - int main()
-    - int main(int argc, char *argv[])
-    - int main (int argc, char *argv[], char *envp[])
-=======
     int main()
     int main(int argc, char *argv[])
     int main (int argc, char *argv[], char *envp[])
->>>>>>> 5bab9fb9bea7d63b6ef07bdc92cf35749dea64ca
 
 -   **How does the shell use the  `PATH`  to find the programs?**
 
@@ -71,11 +61,7 @@ The shell tries each directory in the PATH , left-to-right, and runs the first  
 
 Like all of the `exec` functions, `execve` replaces the calling process image with a new process image. This has the effect of running a new program with the process ID of the calling process. Note that a new process is not started; the new process image simply overlays the original process image. The `execve` function is most commonly used to overlay a process image that has been created by a call to the `fork` function.
 
-<<<<<<< HEAD
-The following example illustrates the use of `execve` to execute the `ls` shell command. Notice that the environment variable is set for the new process.      
-=======
 The following example illustrates the use of `execve` to execute the `ls` shell command. Notice that the `STEPLIB` environment variable is set for the new process.      
->>>>>>> 5bab9fb9bea7d63b6ef07bdc92cf35749dea64ca
 
 
     #include <sys/types.h>
@@ -85,26 +71,15 @@ The following example illustrates the use of `execve` to execute the `ls` shell 
     int main()
     {
         pid_t pid;
-<<<<<<< HEAD
-        char *args[] = {"/bin/ls", "-l", "/usr/", NULL};
-        char *env[] = {0};
-=======
         char *const parmList[] = {"bin/ls", "-l", "/u/userid/dirname", NULL};
         char *const envParms[2] = {"STEPLIB=SASC.V6.LINKLIB", NULL};
->>>>>>> 5bab9fb9bea7d63b6ef07bdc92cf35749dea64ca
     
 	    if ((pid = fork()) == -1)
 	        perror("fork error");
 	    else if (pid == 0)
 	    {
-<<<<<<< HEAD
-	        execve("/bin/ls", args, env);
-	        printf("Return not expected.\n");
-	        exit(1);
-=======
 	        execve("/u/userid/bin/newShell", parmList, envParms);
 	        printf("Return not expected. Must be an execve error\n");
->>>>>>> 5bab9fb9bea7d63b6ef07bdc92cf35749dea64ca
 	    }
     }
 
@@ -243,45 +218,9 @@ hsh main.c shell.c test_ls_2
 $
 
 ```
-<<<<<<< HEAD
-## An example on exec_wait_fork.c
-
-    #include <stdio.h>
-    #include <stdlib.h>
-    #include <unistd.h>
-    #include <sys/wait.h>
-    #include <sys/types.h>
-    #include <error.h>
-    
-    int main(int argc, char **argv)
-    {
-		   pid_t my_pid;
-		   int status;
-		   char *args[] = {"/bin/ls", "-l", 0};
-		   char *env[] = {0};
-		   		   
-		   my_pid = fork();
-		   if (my_pid == -1)
-		   {
-			   perror("fork fails");
-			   return (1);
-		    }
-		    if (child == 0)
-		    {
-				    if (execve("/bin/ls", args, env) == -1)
-				    {
-						    perror("Error");
-						    return (1);
-					}
-			}
-			wait(&status);
-			return (0);
-		}
-=======
 ## Some examples
 
 
->>>>>>> 5bab9fb9bea7d63b6ef07bdc92cf35749dea64ca
 
 ## :rocket: About us  :joystick:
 
