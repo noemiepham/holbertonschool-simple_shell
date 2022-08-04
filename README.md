@@ -26,7 +26,7 @@ Other notable contributions included his work on regular expression and early co
 
 -   **How does a shell work?**
 
-The shell is your interface to the operating system. It acts as a command interpreter; it takes each command and passes it to the operating system.  It then displays the results of this operation on your screen. There are several shells in widespread use.
+A shell is a program that acts as an interpreter which passes commands inputs entered by a user that are then executed by the operating system. The shell runs in a sort of infinite _loop of different functions (i.e. reading typed command, format the command, manage exceptions and execute)_ until the next command is entered.
 
 -   **What is a pid and a ppid?**
 
