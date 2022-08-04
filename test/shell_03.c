@@ -16,7 +16,7 @@ int main(void)
 	char *fullPathCommand;
 	char *sep = "\n\t\r ";
 
-	while (signal)
+	while (1)
 	{
 		signal = isatty(0);
 
