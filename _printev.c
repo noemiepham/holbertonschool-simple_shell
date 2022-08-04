@@ -1,6 +1,6 @@
 #include "shell.h"
 /**
- * _printenv - prints environnement variables
+ * _printev - prints environnement variables
  *
  * Return: any value
  */
