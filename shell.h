@@ -16,12 +16,8 @@ extern char **environ;
 
 /* Prortotypes */
 
-char **split_str(char *str, char *sep);
+char **split_str(char *str);
 int _strlen(char *s);
 void debugArray(char **arr);
 void _printev(void);
-void get_absolute_path(char **cmd);
-char **_getenv(const char *name);
-int execute_command(char *command, char **argument);
-
 #endif

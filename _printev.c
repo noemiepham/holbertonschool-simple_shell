@@ -1,7 +1,8 @@
+
 #include "shell.h"
 /**
- * _printev : print environ 
- * 
+ * @brief
+ *
  */
 void _printev(void)
 {
@@ -12,3 +13,8 @@ void _printev(void)
         i++;
     }
 }
+
+/* int main(void).  
+{
+    _printev();
+} */
