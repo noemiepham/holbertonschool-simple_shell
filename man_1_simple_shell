@@ -1,1 +1,55 @@
-i'm working on file ... :)
+./This is the man page of project C: printf of Holberton School Paris cohort18
+
+.TH Simple shell "Paris, 4 August 2022" "Simple shell man page"
+
+.SH NAME
+.B starting_code_h \- command interpreter (shell)
+
+.SH SYNOPSIS
+
+.B #include "shell.h"
+
+.B ./hsh
+
+[command] [options] [file]
+
+.SH DESCRIPTION
+starting_code_h is a mini shell, command line interpreter that reads lines from either a file or the terminal, interprets and executes them.
+
+Invocation
+If no args are present and if the standard input of starting_code_h is connected to a terminal, it is considered as interactive. So he generally displays the prompt ($) before to read each command. When first starting, the shell inspects argument 0
+
+.SH USAGE
+To use this shell you have to compile doing and running the program doing :
+
+.RS 
+.B $ gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
+
+.B $ ./hsh
+
+.SH EXAMPLES
+
+.B $ ls
+
+.B $ /bin/ls -l
+
+
+.SH SEE ALSO
+
+.I access(2), execve(2), exit(3), fflush(3), fork(2), free(3), getcwd(3), getline(3), getpid(2), isatty(3), kill(2), malloc(3), open(2), perror(3), read(2), signal(2), strtok(3), wait(2), write(2)
+
+.SH BUGS
+Actually, starting_code_h can't execute builtins like mkdir, cd, etc.
+
+.SH AUTHOR
+Noemie Pham:
+https://github.com/noemiepham
+
+Iker Lubamba Mbambi:
+https://github.com/ikerikks
+
+Yeh-Hsin (mia) Lee:
+https://github.com/mimi-fOlle
+
+
+
