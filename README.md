@@ -26,6 +26,7 @@ Other notable contributions included his work on regular expression and early co
 
 -   **How does a shell work?**
 
+![Simple Shell loop](https://user-images.githubusercontent.com/105150447/182952977-26fabee4-a8a2-474e-8ba4-4f5d1de6adef.png)
 A shell is a program that acts as an interpreter which passes commands inputs entered by a user that are then executed by the operating system. The shell runs in a sort of infinite _loop of different functions (i.e. reading typed command, format the command, manage exceptions and execute)_ until the next command is entered.
 
 -   **What is a pid and a ppid?**
