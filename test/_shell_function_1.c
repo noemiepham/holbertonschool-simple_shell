@@ -46,6 +46,21 @@ int _strlen(char *s)
 return (strlen);
 }
 /**
+ * _printev - prints environnement variables
+ *
+ * Return: any value
+ */
+void _printev(void)
+{
+	int i = 0;
+	while (environ[i] != NULL)
+	{
+		printf("%s\n", environ[i]);
+		i++;
+	}
+}
+
+/**
  * debugArray - pour debuge le projet
  *@arr: varibale pour tester
  */
