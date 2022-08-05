@@ -27,7 +27,6 @@ char **_getenv(const char *name)
 			free(envName);
             break;
         }
-		free(envName);
         i++;
     }
 

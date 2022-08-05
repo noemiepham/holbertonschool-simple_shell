@@ -83,7 +83,6 @@ int main(void)
 					{
 						printf("DEBUG bloc PATH fullCommand not found, try next\n");
 					} */
-					free(copyFullPath);
 				}
 				if (status_exec == 1)
 					printf("%s NOT FOUND\n", command[0]);
