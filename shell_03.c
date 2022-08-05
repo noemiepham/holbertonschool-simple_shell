@@ -13,12 +13,12 @@ int main(void)
 	int get, j, status_exec;
 	int signal = 1;
 	struct stat st;
-	char *fullPathCommand;
-	char *envPath;
+	char *fullPathCommand = NULL;
+	char *envPath = NULL;
 
 	char *sep = "\n\t\r ";
 	char *pathSep = ":";
-	char *cur_word;
+	char *cur_word = NULL;
 
 	while (signal)
 	{
@@ -69,14 +69,14 @@ int main(void)
 					if (stat(fullPathCommand, &st) == 0)
 					{
 						status_exec = execute_command(fullPathCommand, command);
-						clearAndFree(fullPathCommand);
+						free(fullPathCommand);
 						break;
 					}
 					/*else 
 					{
 						printf("DEBUG bloc PATH fullCommand not found, try next\n");
 					}*/
-					clearAndFree(fullPathCommand);
+					free(fullPathCommand);
 
 					cur_word = strtok(NULL, pathSep);
 					j++;
