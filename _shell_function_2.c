@@ -66,6 +66,9 @@ char* getEnvKey(char *env)
 
     envKey = malloc(sizeof(char) * (separatorPosition));
 
+	if (envKey == NULL)
+		return (NULL);
+
     for (i=0,j =0 ; j<separatorPosition ;i++, j++){
         envKey[i] = env[j];
     }
@@ -90,6 +93,9 @@ char* getEnvValue(char *env)
 
 
     value = malloc(sizeof(char) * (env_length - separatorPosition));
+
+	if (value == NULL)
+		return (NULL);
 
     for (i=0,j=separatorPosition + 1 ; j < env_length ;i++, j++){
         value[i] = env[j];
@@ -159,6 +165,9 @@ char *_copyString(char *src)
         size++;
 
     dst = malloc(sizeof(char) * size);
+
+	if (dst == NULL)
+		return (NULL);
 
     for (i=0; i< size; i++)
     {
