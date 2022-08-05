@@ -213,10 +213,14 @@ char *_makeFullCommand(char *dst, char *command, char *fullPath)
 void clearAndFree(char *string)
 {
     int length = 0;
-    while (string[length])
+
+    if (string != NULL)
     {
-        string[length] = '\0';
-        length++;
+        while (string[length])
+        {
+            string[length] = '\0';
+            length++;
+        }
+        free(string);
     }
-    free(string);
 }
