@@ -1,4 +1,4 @@
-# # C - Simple Shell
+﻿# # C - Simple Shell
 In Unix System, the most generic sense of the term **shell** means any program that users employ to type commands. A shell hides the details of the underlying operating system and manages the technical details of the operating system's application programming interface, which is the level of the operating system that programs running on that operating system use.
 
 **#C - Simple Shell is a project to handle some of those hidden features and algorithms what actually work inside a shell, and find how are they executed properly after they  have been entered.**
@@ -26,7 +26,9 @@ Other notable contributions included his work on regular expression and early co
 
 -   **How does a shell work?**
 
-The shell is your interface to the operating system. It acts as a command interpreter; it takes each command and passes it to the operating system.  It then displays the results of this operation on your screen. There are several shells in widespread use.
+![Simple Shell loop](https://user-images.githubusercontent.com/105150447/182952977-26fabee4-a8a2-474e-8ba4-4f5d1de6adef.png)
+
+A shell is a program that acts as an interpreter which passes commands inputs entered by a user that are then executed by the operating system. The shell runs in a sort of infinite _loop of different functions (i.e. reading typed command, format the command, manage exceptions and execute)_ until the next command is entered.
 
 -   **What is a pid and a ppid?**
 
@@ -47,13 +49,13 @@ The main difference between system call and function call is that a system call 
 
 By calling fork (). A new process can then be created. By copying the addresses of the previous processes into the new ones, you can create a new identity. This produces a new process from the old one. It is a parent process, and a child process is created following it.
 
--   **What are the three prototypes of  `main`?**
+ -   **What are the three prototypes of  `main`?**
 
-    int main()
-    int main(int argc, char *argv[])
-    int main (int argc, char *argv[], char *envp[])
+	 - int main()
+	 - int main(int argc, char *argv[])
+	 - int main (int argc, char *argv[], char *envp[])
 
--   **How does the shell use the  `PATH`  to find the programs?**
+ -   **How does the shell use the  `PATH`  to find the programs?**
 
 The shell tries each directory in the PATH , left-to-right, and runs the first  executable program  with the matching command name that it finds. Slashes in the path name prevent the shell from using PATH to look up the command name, so the shell executes /bin/date directly.
 
@@ -61,7 +63,7 @@ The shell tries each directory in the PATH , left-to-right, and runs the first  
 
 Like all of the `exec` functions, `execve` replaces the calling process image with a new process image. This has the effect of running a new program with the process ID of the calling process. Note that a new process is not started; the new process image simply overlays the original process image. The `execve` function is most commonly used to overlay a process image that has been created by a call to the `fork` function.
 
-The following example illustrates the use of `execve` to execute the `ls` shell command. Notice that the `STEPLIB` environment variable is set for the new process.      
+The following example illustrates the use of `execve` to execute the `ls` shell command. Notice that the environment variable is set for the new process.      
 
 
     #include <sys/types.h>
@@ -71,15 +73,16 @@ The following example illustrates the use of `execve` to execute the `ls` shell 
     int main()
     {
         pid_t pid;
-        char *const parmList[] = {"bin/ls", "-l", "/u/userid/dirname", NULL};
-        char *const envParms[2] = {"STEPLIB=SASC.V6.LINKLIB", NULL};
+        char *args[] = {"/bin/ls", "-l", "/usr/", NULL};
+        char *env[] = {0};
     
 	    if ((pid = fork()) == -1)
 	        perror("fork error");
 	    else if (pid == 0)
 	    {
-	        execve("/u/userid/bin/newShell", parmList, envParms);
-	        printf("Return not expected. Must be an execve error\n");
+	        execve("/bin/ls", args, env);
+	        printf("Return not expected.\n");
+	        exit(1);
 	    }
     }
 
@@ -218,9 +221,39 @@ hsh main.c shell.c test_ls_2
 $
 
 ```
-## Some examples
+## An example on exec_wait_fork.c
 
-
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <unistd.h>
+    #include <sys/wait.h>
+    #include <sys/types.h>
+    #include <error.h>
+    
+    int main(int argc, char **argv)
+    {
+	   pid_t my_pid;
+	   int status;
+	   char *args[] = {"/bin/ls", "-l", 0};
+	   char *env[] = {0};
+		   		   
+	   my_pid = fork();
+	   if (my_pid == -1)
+	   {
+		   perror("fork fails");
+		   return (1);
+	   }
+	   if (child == 0)
+	   {
+		    if (execve("/bin/ls", args, env) == -1)
+	            {
+			    perror("Error");
+			    return (1);
+		    }
+	   }
+	   wait(&status);
+	   return (0);
+	}
 
 ## :rocket: About us  :joystick:
 
