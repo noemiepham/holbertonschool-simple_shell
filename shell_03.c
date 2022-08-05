@@ -69,6 +69,7 @@ int main(void)
 					if (stat(fullPathCommand, &st) == 0)
 					{
 						status_exec = execute_command(fullPathCommand, command);
+						clearAndFree(fullPathCommand);
 						break;
 					}
 					/*else 
