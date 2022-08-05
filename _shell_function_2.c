@@ -176,3 +176,41 @@ char *_copyString(char *src)
 
     return dst;
 }
+
+
+char *_makeFullCommand(char *dst, char *command, char *fullPath)
+{
+    int commandLength = 0;
+    int fullPathLength = 0;
+    int i, j;
+
+    commandLength = _strlen(command);
+    fullPathLength = _strlen(fullPath);
+
+    /* printf("DEBUG _makeFullCommand command length : %d\n", commandLength);
+    printf("DEBUG _makeFullCommand full path length : %d\n", fullPathLength); */
+
+    dst = malloc(sizeof(char) * (commandLength + 1 + fullPathLength));
+
+	if (dst == NULL)
+		return (NULL);
+
+    for (i = 0; i< fullPathLength;i++)
+    {
+        dst[i] = fullPath[i];
+    }
+    /* printf("DEBUG _makeFullCommand dst : %s\n", dst); */
+
+    dst[fullPathLength] = '/';
+
+    /* printf("DEBUG _makeFullCommand dst : %s\n", dst); */
+
+    for (i = 0, j = fullPathLength + 1; i< commandLength;i++, j++)
+    {
+        dst[j] = command[i];
+    }
+
+    /* printf("DEBUG _makeFullCommand dst : %s\n", dst); */
+
+    return dst;
+}

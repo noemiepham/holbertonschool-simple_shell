@@ -27,5 +27,6 @@ int execute_command(char *command, char **argument);
 char *getEnvKey(char *env);
 char *getEnvValue(char *env);
 char *_copyString(char *src);
+char *_makeFullCommand(char *dst, char *command, char *fullPath);
 
 #endif

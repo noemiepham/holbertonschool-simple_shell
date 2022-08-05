@@ -14,7 +14,7 @@ int main(void)
 	int signal = 1;
 	struct stat st;
 	char *fullPathCommand;
-	char *copyFullPath;
+
 	char *sep = "\n\t\r ";
 
 	while (signal)
@@ -65,15 +65,15 @@ int main(void)
 				for (j = 0; envPath[j] != NULL; j++)
 				{
 				/* 	 printf("bloc PATH loop j=[%d], val=[%s]\n", j, envPath[j]); */
-					copyFullPath = _copyString(envPath[j]);
+					/* copyFullPath = _copyString(envPath[j]); */
 				/* 	printf("DEBUG bloc PATH fullCommand is : %s\n", copyFullPath);  */
-					fullPathCommand = copyFullPath; /* utilise une copie car execve consomme le fullPathCommand et donc envPath[j] */
-
-					strcat(fullPathCommand, "/");
+					/* fullPathCommand = copyFullPath;  */ /* utilise une copie car execve consomme le fullPathCommand et donc envPath[j] */
+					/*
+					/strcat(fullPathCommand, "/");
 					strcat(fullPathCommand, command[0]);
-
+					*/
+					fullPathCommand = _makeFullCommand(fullPathCommand, command[0], envPath[j]); 
 					/* printf("DEBUG bloc PATH fullPathCommand is : %s\n", fullPathCommand); */
-
 					if (stat(fullPathCommand, &st) == 0)
 					{
 						status_exec = execute_command(fullPathCommand, command);
