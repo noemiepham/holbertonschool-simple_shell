@@ -31,11 +31,13 @@ char **_getenv(const char *name)
     }
 
 
- array = malloc(sizeof(char) * BUFFER);
+    array = malloc(sizeof(char) * BUFFER);
     if (array == NULL)
+    {
+        free(envValue);
         return (NULL);
+    }
     
-
     cur_word = strtok(envValue, sep);
     /* printf("DEBUG getenv envValue=[%s]\n", cur_word); */
 
