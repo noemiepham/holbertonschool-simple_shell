@@ -24,6 +24,7 @@ char **_getenv(const char *name)
         {
             /* printf("DEBUG getenv at i=[%d], environ [%s] found\n", i, envName); */
             envValue = getEnvValue(environ[i]);
+			free(envName);
             break;
         }
         i++;
@@ -46,6 +47,7 @@ char **_getenv(const char *name)
         j++;
     }
     array[i] = NULL;
+	free(envValue);
     return (array);
 }
 

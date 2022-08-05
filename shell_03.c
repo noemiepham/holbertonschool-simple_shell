@@ -86,6 +86,8 @@ int main(void)
 				}
 				if (status_exec == 1)
 					printf("%s NOT FOUND\n", command[0]);
+				free(copyFullPath);
+				free(envPath);
 			}
 		}
 	}
