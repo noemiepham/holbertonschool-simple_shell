@@ -42,7 +42,7 @@ char* getEnvKey(char *env, char *envKey)
 		separatorPosition++;
     /* printf("getEnvKey separatorPosition : %d\n", separatorPosition); */
 
-    envKey = malloc(sizeof(char) * (separatorPosition));
+    envKey = calloc(separatorPosition, sizeof(char));
 
 	if (envKey == NULL)
 		return (NULL);
@@ -70,7 +70,7 @@ char* getEnvValue(char *env)
     /* printf("getEnvValue separatorPosition : %d\n", separatorPosition); */
 
 
-    value = malloc(sizeof(char) * (env_length - separatorPosition));
+    value = calloc((env_length - separatorPosition), sizeof(char));
 
 	if (value == NULL)
 		return (NULL);
@@ -184,7 +184,7 @@ char *_makeFullCommand(char *dst, char *command, char *fullPath)
     /* printf("DEBUG _makeFullCommand command length : %d\n", commandLength);
     printf("DEBUG _makeFullCommand full path length : %d\n", fullPathLength); */
 
-    dst = malloc(sizeof(char) * (commandLength + 1 + fullPathLength));
+    dst = calloc((commandLength + 1 + fullPathLength), sizeof(char));
 
 	if (dst == NULL)
 		return (NULL);
