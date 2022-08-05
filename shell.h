@@ -21,12 +21,14 @@ int _strlen(char *s);
 void debugArray(char **arr);
 void _printev(void);
 void get_absolute_path(char **cmd);
-char **_getenv(const char *name);
+char *_getenv(const char *name);
 int execute_command(char *command, char **argument);
 
 char *getEnvKey(char *env);
 char *getEnvValue(char *env);
+int _countCharInString(char *string, char toLook);
 char *_copyString(char *src);
 char *_makeFullCommand(char *dst, char *command, char *fullPath);
+void clearAndFree(char *string);
 
 #endif

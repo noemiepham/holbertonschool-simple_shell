@@ -9,13 +9,16 @@ int main(void)
 
 	char *str = NULL;
 	size_t len = 0;
-	char **command, **envPath;
+	char **command;
 	int get, j, status_exec;
 	int signal = 1;
 	struct stat st;
 	char *fullPathCommand;
+	char *envPath;
 
 	char *sep = "\n\t\r ";
+	char *pathSep = ":";
+	char *cur_word;
 
 	while (signal)
 	{
@@ -55,25 +58,14 @@ int main(void)
 			/* 	printf("DEBUG bloc PATH\n"); */
 				envPath = _getenv("PATH");
 
+				cur_word = strtok(envPath, pathSep);
+				/* printf("DEBUG getenv envValue=[%s]\n", cur_word); */
 				j = 0;
-			/* 	while (envPath[j])
+				while (cur_word != NULL)
 				{
-					printf("DEBUG bloc PATH assert : %s\n", envPath[j]);
-					j++;
-				} */
-
-				for (j = 0; envPath[j] != NULL; j++)
-				{
-				/* 	 printf("bloc PATH loop j=[%d], val=[%s]\n", j, envPath[j]); */
-					/* copyFullPath = _copyString(envPath[j]); */
-				/* 	printf("DEBUG bloc PATH fullCommand is : %s\n", copyFullPath);  */
-					/* fullPathCommand = copyFullPath;  */ /* utilise une copie car execve consomme le fullPathCommand et donc envPath[j] */
-					/*
-					/strcat(fullPathCommand, "/");
-					strcat(fullPathCommand, command[0]);
-					*/
-					fullPathCommand = _makeFullCommand(fullPathCommand, command[0], envPath[j]); 
-					/* printf("DEBUG bloc PATH fullPathCommand is : %s\n", fullPathCommand); */
+					/* printf("DEBUG PATH j=[%d], value=[%s] for cmd=[%s]\n", j, cur_word, command[0]); */
+					fullPathCommand = _makeFullCommand(fullPathCommand, command[0], cur_word);
+					/* printf("DEBUG PATH fullPathCommand=[%s]\n", fullPathCommand); */
 					if (stat(fullPathCommand, &st) == 0)
 					{
 						status_exec = execute_command(fullPathCommand, command);
@@ -82,9 +74,20 @@ int main(void)
 					/*else 
 					{
 						printf("DEBUG bloc PATH fullCommand not found, try next\n");
-					} */
-					free(fullPathCommand);
+					}*/
+					clearAndFree(fullPathCommand);
+
+					cur_word = strtok(NULL, pathSep);
+					j++;
 				}
+
+				/* j = 0;
+				while (envPath[j])
+				{
+					printf("DEBUG bloc PATH assert : %s\n", envPath[j]);
+					j++;
+				} */
+
 				if (status_exec == 1)
 					printf("%s NOT FOUND\n", command[0]);
 				free(envPath);

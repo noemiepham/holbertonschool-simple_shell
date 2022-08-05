@@ -5,15 +5,11 @@
  * Return: environ value
  */
 
-char **_getenv(const char *name)
+char *_getenv(const char *name)
 {
     int i = 0;
-    int j = 0;
     char *envName;
     char *envValue = NULL;
-    char **array;
-    char *cur_word;
-    char *sep = ":";
 
     while (environ[i])
     {
@@ -30,27 +26,7 @@ char **_getenv(const char *name)
         i++;
     }
 
-
-    array = malloc(sizeof(char) * BUFFER);
-    if (array == NULL)
-    {
-        free(envValue);
-        return (NULL);
-    }
-    
-    cur_word = strtok(envValue, sep);
-    /* printf("DEBUG getenv envValue=[%s]\n", cur_word); */
-
-    while (cur_word != NULL)
-    {
-      /*   printf("DEBUG getenv var=[%s], value=[%s]\n", envName, cur_word); */
-        array[j] = cur_word;
-        cur_word = strtok(NULL, sep);
-        j++;
-    }
-    array[i] = NULL;
-	free(envValue);
-    return (array);
+    return (envValue);
 }
 
 char* getEnvKey(char *env)
@@ -106,6 +82,22 @@ char* getEnvValue(char *env)
     /* printf("getEnvValue : %s\n", value); */
 
     return (value);
+}
+
+int _countCharInString(char *string, char toLook)
+{
+    int count = 0;
+    int i;
+    int length = _strlen(string);
+    for (i=0; i< length; i++)
+    {
+        if (string[i] == toLook)
+        {
+            count++;
+        }
+    }
+
+    return (count);
 }
 
 /* int main(void)
@@ -215,4 +207,16 @@ char *_makeFullCommand(char *dst, char *command, char *fullPath)
     /* printf("DEBUG _makeFullCommand dst : %s\n", dst); */
 
     return dst;
+}
+
+
+void clearAndFree(char *string)
+{
+    int length = 0;
+    while (string[length])
+    {
+        string[length] = '\0';
+        length++;
+    }
+    free(string);
 }
