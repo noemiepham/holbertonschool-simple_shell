@@ -69,14 +69,14 @@ int main(void)
 					if (stat(fullPathCommand, &st) == 0)
 					{
 						status_exec = execute_command(fullPathCommand, command);
-						free(fullPathCommand);
+						clearAndFree(fullPathCommand);
 						break;
 					}
 					/*else 
 					{
 						printf("DEBUG bloc PATH fullCommand not found, try next\n");
 					}*/
-					free(fullPathCommand);
+					clearAndFree(fullPathCommand);
 
 					cur_word = strtok(NULL, pathSep);
 					j++;

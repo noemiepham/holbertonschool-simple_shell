@@ -8,32 +8,32 @@
 char *_getenv(const char *name)
 {
     int i = 0;
-    char *envName;
+    char *envName = NULL;
     char *envValue = NULL;
 
     while (environ[i])
     {
         /* printf("DEBUG etenv at i=[%d], environ [%s] found\n", i, environ[i]); */
-        envName = getEnvKey(environ[i]);
+        envName = getEnvKey(environ[i], envName);
 
         if (strcmp(envName, name) == 0)
         {
             /* printf("DEBUG getenv at i=[%d], environ [%s] found\n", i, envName); */
             envValue = getEnvValue(environ[i]);
-			free(envName);
+			clearAndFree(envName);
             break;
         }
+        clearAndFree(envName);
         i++;
     }
 
     return (envValue);
 }
 
-char* getEnvKey(char *env)
+char* getEnvKey(char *env, char *envKey)
 {
     int env_length = 0;
     int separatorPosition = 0;
-    char *envKey = NULL;
     int i, j;
 	while (env[env_length])
 		env_length++;
