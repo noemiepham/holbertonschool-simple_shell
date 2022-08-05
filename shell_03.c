@@ -79,15 +79,16 @@ int main(void)
 						status_exec = execute_command(fullPathCommand, command);
 						break;
 					}
-/* 					else 
+					/*else 
 					{
 						printf("DEBUG bloc PATH fullCommand not found, try next\n");
 					} */
 				}
 				if (status_exec == 1)
 					printf("%s NOT FOUND\n", command[0]);
-				free(envPath);
 			}
+			free(fullPathCommand);
+			free(envPath);
 		}
 	}
 	free(command);
