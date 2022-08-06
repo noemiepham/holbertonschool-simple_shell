@@ -15,10 +15,13 @@ int main(void)
 	struct stat st;
 	char *fullPathCommand = NULL;
 	char *envPath = NULL;
+	char *copyEnvPath = NULL;
 
 	char *sep = "\n\t\r ";
 	char *pathSep = ":";
 	char *cur_word = NULL;
+
+	envPath = _getenv("PATH");
 
 	while (signal)
 	{
@@ -56,9 +59,10 @@ int main(void)
 			else
 			{
 			/* 	printf("DEBUG bloc PATH\n"); */
-				envPath = _getenv("PATH");
+				/* envPath = _getenv("PATH"); */
+				copyEnvPath = _copyString(envPath);
 
-				cur_word = strtok(envPath, pathSep);
+				cur_word = strtok(copyEnvPath, pathSep);
 				/* printf("DEBUG getenv envValue=[%s]\n", cur_word); */
 				j = 0;
 				while (cur_word != NULL)
@@ -91,10 +95,12 @@ int main(void)
 
 				if (status_exec == 1)
 					printf("%s NOT FOUND\n", command[0]);
-				free(envPath);
+				/* free(envPath); */
+				free(copyEnvPath);
 			}
 		}
 	}
+	free(envPath);
 	free(command);
 	return (0);
 }

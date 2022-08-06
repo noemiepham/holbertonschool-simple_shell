@@ -153,7 +153,7 @@ int execute_command(char *command, char **argument)
 char *_copyString(char *src)
 {
     char *dst;
-    int size = 0;
+    int size = 1024;
     int i;
     while (src[size])
         size++;
