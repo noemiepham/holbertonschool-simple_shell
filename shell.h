@@ -31,5 +31,6 @@ char *_copyString(char *src, char *dst);
 char *_makeFullCommand(char *dst, char *command, char *fullPath);
 void clearAndFree(char *string);
 void _reset(char *string);
+char *_which(char *fullPathCommand, char *executable, char *copyEnvPath);
 
 #endif

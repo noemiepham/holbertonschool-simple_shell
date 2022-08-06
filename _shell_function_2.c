@@ -20,7 +20,7 @@ char *_getenv(const char *name)
         {
             /* printf("DEBUG getenv at i=[%d], environ [%s] found\n", i, envName); */
             envValue = getEnvValue(environ[i]);
-			clearAndFree(envName);
+            clearAndFree(envName);
             break;
         }
         clearAndFree(envName);
@@ -30,24 +30,25 @@ char *_getenv(const char *name)
     return (envValue);
 }
 
-char* getEnvKey(char *env, char *envKey)
+char *getEnvKey(char *env, char *envKey)
 {
     int env_length = 0;
     int separatorPosition = 0;
     int i, j;
-	while (env[env_length])
-		env_length++;
+    while (env[env_length])
+        env_length++;
 
     while (env[separatorPosition] != '=')
-		separatorPosition++;
+        separatorPosition++;
     /* printf("getEnvKey separatorPosition : %d\n", separatorPosition); */
 
     envKey = calloc(separatorPosition, sizeof(char));
 
-	if (envKey == NULL)
-		return (NULL);
+    if (envKey == NULL)
+        return (NULL);
 
-    for (i=0,j =0 ; j<separatorPosition ;i++, j++){
+    for (i = 0, j = 0; j < separatorPosition; i++, j++)
+    {
         envKey[i] = env[j];
     }
 
@@ -55,27 +56,27 @@ char* getEnvKey(char *env, char *envKey)
     return envKey;
 }
 
-char* getEnvValue(char *env)
+char *getEnvValue(char *env)
 {
     int env_length = 0;
     int separatorPosition = 0;
     char *value = NULL;
     int i, j;
-	while (env[env_length])
-		env_length++;
+    while (env[env_length])
+        env_length++;
     /* printf("getEnvValue env_length : %d\n", env_length); */
 
     while (env[separatorPosition] != '=')
-		separatorPosition++;
+        separatorPosition++;
     /* printf("getEnvValue separatorPosition : %d\n", separatorPosition); */
-
 
     value = calloc((env_length - separatorPosition), sizeof(char));
 
-	if (value == NULL)
-		return (NULL);
+    if (value == NULL)
+        return (NULL);
 
-    for (i=0,j=separatorPosition + 1 ; j < env_length ;i++, j++){
+    for (i = 0, j = separatorPosition + 1; j < env_length; i++, j++)
+    {
         value[i] = env[j];
     }
 
@@ -89,7 +90,7 @@ int _countCharInString(char *string, char toLook)
     int count = 0;
     int i;
     int length = _strlen(string);
-    for (i=0; i< length; i++)
+    for (i = 0; i < length; i++)
     {
         if (string[i] == toLook)
         {
@@ -113,7 +114,6 @@ int _countCharInString(char *string, char toLook)
     return (0);
 }
  */
-
 
 #include "shell.h"
 /**
@@ -160,25 +160,23 @@ char *_copyString(char *src, char *dst)
 
     if (dst == NULL)
     {
-        printf("DEBUG _copyString dst is null ==> mallo\n"); 
+        /* printf("DEBUG _copyString dst is null ==> malloc\n"); */
         dst = malloc(sizeof(char) * size);
         if (dst == NULL)
             return (NULL);
     }
-    else 
+    else
     {
         _reset(dst);
     }
 
-
-    for (i=0; i< size; i++)
+    for (i = 0; i < size; i++)
     {
         dst[i] = src[i];
     }
 
     return dst;
 }
-
 
 char *_makeFullCommand(char *dst, char *command, char *fullPath)
 {
@@ -193,11 +191,11 @@ char *_makeFullCommand(char *dst, char *command, char *fullPath)
     printf("DEBUG _makeFullCommand full path length : %d\n", fullPathLength); */
 
     dst = calloc((commandLength + 1 + fullPathLength), sizeof(char));
+    
+    if (dst == NULL)
+        return (NULL);
 
-	if (dst == NULL)
-		return (NULL);
-
-    for (i = 0; i< fullPathLength;i++)
+    for (i = 0; i < fullPathLength; i++)
     {
         dst[i] = fullPath[i];
     }
@@ -207,7 +205,7 @@ char *_makeFullCommand(char *dst, char *command, char *fullPath)
 
     /* printf("DEBUG _makeFullCommand dst : %s\n", dst); */
 
-    for (i = 0, j = fullPathLength + 1; i< commandLength;i++, j++)
+    for (i = 0, j = fullPathLength + 1; i < commandLength; i++, j++)
     {
         dst[j] = command[i];
     }
@@ -216,7 +214,6 @@ char *_makeFullCommand(char *dst, char *command, char *fullPath)
 
     return dst;
 }
-
 
 void clearAndFree(char *string)
 {
@@ -236,4 +233,34 @@ void _reset(char *string)
             length++;
         }
     }
+}
+
+char *_which(char *fullPathCommand, char *executable, char *copyEnvPath)
+{
+    char *pathSep = ":";
+    char *path_token = NULL;
+    int j;
+
+    path_token = strtok(copyEnvPath, pathSep);
+    /* printf("DEBUG getenv envValue=[%s]\n", path_token); */
+    j = 0;
+    while (path_token != NULL)
+    {
+        /* printf("DEBUG _which PATH j=[%d], value=[%s] for cmd=[%s]\n", j, path_token, executable); */
+        fullPathCommand = _makeFullCommand(fullPathCommand, executable, path_token);
+        if (access(fullPathCommand, X_OK) != 0)
+		{
+			free(fullPathCommand);
+			fullPathCommand = NULL;
+			path_token = strtok(NULL, pathSep);
+		}
+		else
+        {
+            /* printf("DEBUG _which executable found in PATH\n"); */
+			break;
+        }
+        j++;
+    }
+
+    return (fullPathCommand);
 }

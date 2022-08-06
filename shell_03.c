@@ -10,7 +10,7 @@ int main(void)
 	char *str = NULL;
 	size_t len = 0;
 	char **command;
-	int get, j, status_exec;
+	int get, status_exec;
 	int signal = 1;
 	struct stat st;
 	char *fullPathCommand = NULL;
@@ -18,8 +18,8 @@ int main(void)
 	char *copyEnvPath = NULL;
 
 	char *sep = "\n\t\r ";
-	char *pathSep = ":";
-	char *cur_word = NULL;
+	
+	
 
 	envPath = _getenv("PATH");
 
@@ -61,43 +61,22 @@ int main(void)
 			/* 	printf("DEBUG bloc PATH\n"); */
 				/* envPath = _getenv("PATH"); */
 				copyEnvPath = _copyString(envPath, copyEnvPath);
-				printf("DEBUG bloc PATH copyEnvPath %s\n", copyEnvPath);
+				/* printf("DEBUG bloc PATH copyEnvPath %s\n", copyEnvPath); */
 
-				cur_word = strtok(copyEnvPath, pathSep);
-				/* printf("DEBUG getenv envValue=[%s]\n", cur_word); */
-				j = 0;
-				while (cur_word != NULL)
+				fullPathCommand = _which(fullPathCommand, command[0], copyEnvPath);
+				if (fullPathCommand != NULL)
 				{
-					/* printf("DEBUG PATH j=[%d], value=[%s] for cmd=[%s]\n", j, cur_word, command[0]); */
-					fullPathCommand = _makeFullCommand(fullPathCommand, command[0], cur_word);
-					/* printf("DEBUG PATH fullPathCommand=[%s]\n", fullPathCommand); */
-					if (stat(fullPathCommand, &st) == 0)
-					{
-						status_exec = execute_command(fullPathCommand, command);
-						clearAndFree(fullPathCommand);
-						break;
-					}
-					/*else 
-					{
-						printf("DEBUG bloc PATH fullCommand not found, try next\n");
-					}*/
-					clearAndFree(fullPathCommand);
-
-					cur_word = strtok(NULL, pathSep);
-					j++;
+					status_exec = execute_command(fullPathCommand, command);
+					if (status_exec == 1)
+						printf("Erreur execution de %s\n", command[0]);
+				}
+				else {
+					printf("%s NOT FOUND\n", command[0]);
 				}
 
-				/* j = 0;
-				while (envPath[j])
-				{
-					printf("DEBUG bloc PATH assert : %s\n", envPath[j]);
-					j++;
-				} */
-
-				if (status_exec == 1)
-					printf("%s NOT FOUND\n", command[0]);
 				/* free(envPath); */
 				_reset(copyEnvPath);
+				free(fullPathCommand);
 			}
 		}
 	}
