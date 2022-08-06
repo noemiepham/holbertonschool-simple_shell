@@ -150,18 +150,26 @@ int execute_command(char *command, char **argument)
     return (exec);
 }
 
-char *_copyString(char *src)
+char *_copyString(char *src, char *dst)
 {
-    char *dst;
-    int size = 1024;
+
+    int size = 0;
     int i;
     while (src[size])
         size++;
 
-    dst = malloc(sizeof(char) * size);
+    if (dst == NULL)
+    {
+        printf("DEBUG _copyString dst is null ==> mallo\n"); 
+        dst = malloc(sizeof(char) * size);
+        if (dst == NULL)
+            return (NULL);
+    }
+    else 
+    {
+        _reset(dst);
+    }
 
-	if (dst == NULL)
-		return (NULL);
 
     for (i=0; i< size; i++)
     {
@@ -212,6 +220,12 @@ char *_makeFullCommand(char *dst, char *command, char *fullPath)
 
 void clearAndFree(char *string)
 {
+    _reset(string);
+    free(string);
+}
+
+void _reset(char *string)
+{
     int length = 0;
 
     if (string != NULL)
@@ -221,6 +235,5 @@ void clearAndFree(char *string)
             string[length] = '\0';
             length++;
         }
-        free(string);
     }
 }

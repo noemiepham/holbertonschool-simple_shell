@@ -27,8 +27,9 @@ int execute_command(char *command, char **argument);
 char* getEnvKey(char *env, char *envKey);
 char *getEnvValue(char *env);
 int _countCharInString(char *string, char toLook);
-char *_copyString(char *src);
+char *_copyString(char *src, char *dst);
 char *_makeFullCommand(char *dst, char *command, char *fullPath);
 void clearAndFree(char *string);
+void _reset(char *string);
 
 #endif

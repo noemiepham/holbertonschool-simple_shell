@@ -60,7 +60,8 @@ int main(void)
 			{
 			/* 	printf("DEBUG bloc PATH\n"); */
 				/* envPath = _getenv("PATH"); */
-				copyEnvPath = _copyString(envPath);
+				copyEnvPath = _copyString(envPath, copyEnvPath);
+				printf("DEBUG bloc PATH copyEnvPath %s\n", copyEnvPath);
 
 				cur_word = strtok(copyEnvPath, pathSep);
 				/* printf("DEBUG getenv envValue=[%s]\n", cur_word); */
@@ -96,10 +97,11 @@ int main(void)
 				if (status_exec == 1)
 					printf("%s NOT FOUND\n", command[0]);
 				/* free(envPath); */
-				free(copyEnvPath);
+				_reset(copyEnvPath);
 			}
 		}
 	}
+	free(copyEnvPath);
 	free(envPath);
 	free(command);
 	return (0);
