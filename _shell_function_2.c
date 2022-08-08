@@ -7,25 +7,62 @@
 
 char *_getenv(const char *name)
 {
+    int pathFound = 0;
     int i = 0;
-    char *envName = NULL;
+    int envLength = _strlen((char *)name);
+    int environSize = 0;
+    int environPropertyLength = 0;
+    char **copyEnvironment = NULL;
+    char *envKey = NULL;
     char *envValue = NULL;
+    char *envProperty = NULL;
+    char *copyEnvProperty = NULL;
+    char *currentEnvProperty = NULL;
 
+    while (environ[environSize])
+        environSize++;
+
+    copyEnvironment = malloc(environSize * sizeof(char *));
+    if (copyEnvironment == NULL)
+        return (NULL);
+
+    i = 0;
     while (environ[i])
     {
-        /* printf("DEBUG etenv at i=[%d], environ [%s] found\n", i, environ[i]); */
-        envName = getEnvKey(environ[i], envName);
-
-        if (strcmp(envName, name) == 0)
-        {
-            /* printf("DEBUG getenv at i=[%d], environ [%s] found\n", i, envName); */
-            envValue = getEnvValue(environ[i]);
-            clearAndFree(envName);
-            break;
-        }
-        clearAndFree(envName);
+        envProperty = environ[i];
+        environPropertyLength = _strlen(envProperty);
+        copyEnvProperty = malloc(environPropertyLength * sizeof(char));
+        _strCopy(envProperty, copyEnvProperty);
+        copyEnvironment[i] = copyEnvProperty;
         i++;
     }
+
+    i = 0;
+    while (copyEnvironment[i])
+    {
+        currentEnvProperty = copyEnvironment[i];
+        /* printf("DEBUG getenv copyEnvironment i:%d, value=[%s]\n", i, currentEnvProperty); */
+
+        if (currentEnvProperty != NULL) {
+            /* printf("DEBUG getenv loop property i:%d, value=[%s]\n", i, currentEnvProperty); */
+
+            if (_strContains(currentEnvProperty, (char *)name, envLength) == 0)
+            {
+                envKey = getEnvKey(currentEnvProperty, envKey);
+                /* printf("DEBUG getenv key found =[%s]\n", envKey); */
+                pathFound = 1;
+                break;
+            }
+        }
+        if (pathFound == 1)
+            break;
+        i++;
+    }
+
+    envValue = getEnvValue(currentEnvProperty, envValue);
+    /* printf("DEBUG getenv found =[%s] with value=[%s]\n", envKey, envValue); */
+
+    freeArray(copyEnvironment, environSize);
 
     return (envValue);
 }
@@ -38,7 +75,7 @@ char *getEnvKey(char *env, char *envKey)
     while (env[env_length])
         env_length++;
 
-    while (env[separatorPosition] != '=')
+    while (env[separatorPosition] != PROPERTY_SEPARATROR)
         separatorPosition++;
     /* printf("getEnvKey separatorPosition : %d\n", separatorPosition); */
 
@@ -56,11 +93,10 @@ char *getEnvKey(char *env, char *envKey)
     return envKey;
 }
 
-char *getEnvValue(char *env)
+char *getEnvValue(char *env, char *envValue)
 {
     int env_length = 0;
     int separatorPosition = 0;
-    char *value = NULL;
     int i, j;
     while (env[env_length])
         env_length++;
@@ -70,19 +106,19 @@ char *getEnvValue(char *env)
         separatorPosition++;
     /* printf("getEnvValue separatorPosition : %d\n", separatorPosition); */
 
-    value = calloc((env_length - separatorPosition), sizeof(char));
+    envValue = calloc((env_length - separatorPosition), sizeof(char));
 
-    if (value == NULL)
+    if (envValue == NULL)
         return (NULL);
 
     for (i = 0, j = separatorPosition + 1; j < env_length; i++, j++)
     {
-        value[i] = env[j];
+        envValue[i] = env[j];
     }
 
-    /* printf("getEnvValue : %s\n", value); */
+    /* printf("getEnvValue : %s\n", envValue); */
 
-    return (value);
+    return (envValue);
 }
 
 int _countCharInString(char *string, char toLook)
@@ -150,25 +186,13 @@ int execute_command(char *command, char **argument)
     return (exec);
 }
 
-char *_copyString(char *src, char *dst)
+char *_strCopy(char *src, char *dst)
 {
 
     int size = 0;
     int i;
     while (src[size])
         size++;
-
-    if (dst == NULL)
-    {
-        /* printf("DEBUG _copyString dst is null ==> malloc\n"); */
-        dst = malloc(sizeof(char) * size);
-        if (dst == NULL)
-            return (NULL);
-    }
-    else
-    {
-        _reset(dst);
-    }
 
     for (i = 0; i < size; i++)
     {
@@ -235,11 +259,31 @@ void _reset(char *string)
     }
 }
 
-char *_which(char *fullPathCommand, char *executable, char *copyEnvPath)
+void freeArray(char **array, int size)
+{
+    int i;
+    if (array != NULL)
+    {
+        for (i = 0; i < size; i++)
+        {
+            free(array[i]);
+        }
+        free(array);
+    }
+}
+
+char *_which(char *fullPathCommand, char *executable, char *envPath)
 {
     char *pathSep = ":";
     char *path_token = NULL;
+    char *copyEnvPath = NULL;
     int j;
+
+    copyEnvPath = malloc(_strlen(envPath) * sizeof(char));
+    if (copyEnvPath == NULL) {
+        return (NULL);
+    }
+    _strCopy(envPath, copyEnvPath);
 
     path_token = strtok(copyEnvPath, pathSep);
     /* printf("DEBUG getenv envValue=[%s]\n", path_token); */
@@ -261,6 +305,24 @@ char *_which(char *fullPathCommand, char *executable, char *copyEnvPath)
         }
         j++;
     }
+    free(copyEnvPath);
 
     return (fullPathCommand);
+}
+
+int _strContains(char *str1, char *str2, int maxLength)
+{
+    int contains = 0;
+    int i;
+
+    for (i=0; i<maxLength; i++)
+    {
+        if (str1[i] != str2[i])
+        {
+            contains = 1;
+            break;
+        }
+    }
+
+    return contains;
 }

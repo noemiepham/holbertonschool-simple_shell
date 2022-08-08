@@ -15,11 +15,7 @@ int main(void)
 	struct stat st;
 	char *fullPathCommand = NULL;
 	char *envPath = NULL;
-	char *copyEnvPath = NULL;
-
 	char *sep = "\n\t\r ";
-	
-	
 
 	envPath = _getenv("PATH");
 
@@ -60,10 +56,10 @@ int main(void)
 			{
 			/* 	printf("DEBUG bloc PATH\n"); */
 				/* envPath = _getenv("PATH"); */
-				copyEnvPath = _copyString(envPath, copyEnvPath);
+				/* copyEnvPath = _copyString(envPath, copyEnvPath); */
 				/* printf("DEBUG bloc PATH copyEnvPath %s\n", copyEnvPath); */
 
-				fullPathCommand = _which(fullPathCommand, command[0], copyEnvPath);
+				fullPathCommand = _which(fullPathCommand, command[0], envPath);
 				if (fullPathCommand != NULL)
 				{
 					status_exec = execute_command(fullPathCommand, command);
@@ -75,12 +71,12 @@ int main(void)
 				}
 
 				/* free(envPath); */
-				_reset(copyEnvPath);
+				/* _reset(copyEnvPath); */
 				free(fullPathCommand);
 			}
 		}
 	}
-	free(copyEnvPath);
+	/* free(copyEnvPath); */
 	free(envPath);
 	free(command);
 	return (0);

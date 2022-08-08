@@ -4,6 +4,8 @@
 #define TRUE 1
 #define BUFFER 1024
 #define PROMPT "$ "
+#define PROPERTY_SEPARATROR '='
+#define PATH_SEPARATROR ':'
 extern char **environ;
 
 #include <stdio.h>
@@ -25,12 +27,14 @@ char *_getenv(const char *name);
 int execute_command(char *command, char **argument);
 
 char* getEnvKey(char *env, char *envKey);
-char *getEnvValue(char *env);
+char *getEnvValue(char *env,  char *envValue);
 int _countCharInString(char *string, char toLook);
-char *_copyString(char *src, char *dst);
+char *_strCopy(char *src, char *dst);
 char *_makeFullCommand(char *dst, char *command, char *fullPath);
 void clearAndFree(char *string);
 void _reset(char *string);
+void freeArray(char **array, int size);
 char *_which(char *fullPathCommand, char *executable, char *copyEnvPath);
+int _strContains(char *str1, char *str2, int maxLength);
 
 #endif
