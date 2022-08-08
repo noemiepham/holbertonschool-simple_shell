@@ -13,7 +13,6 @@ char *_getenv(const char *name)
     int environSize = 0;
     int environPropertyLength = 0;
     char **copyEnvironment = NULL;
-    char *envKey = NULL;
     char *envValue = NULL;
     char *envProperty = NULL;
     char *copyEnvProperty = NULL;
@@ -48,7 +47,6 @@ char *_getenv(const char *name)
 
             if (_strContains(currentEnvProperty, (char *)name, envLength) == 0)
             {
-                envKey = getEnvKey(currentEnvProperty, envKey);
                 /* printf("DEBUG getenv key found =[%s]\n", envKey); */
                 pathFound = 1;
                 break;
