@@ -41,6 +41,10 @@ int main(void)
 			{
 				free(command);
 				free(str);
+				printf("DEBUG free envPath\n");
+				_strFree(envPath);
+				printf("DEBUG free fullPathCommand\n");
+				_strFree(fullPathCommand);
 				exit(EXIT_SUCCESS);
 			}
 			else if (strcmp(command[0], "env") == 0)
@@ -72,13 +76,15 @@ int main(void)
 				}
 
 				free(envPath);
+				envPath = NULL;
 				/* _reset(copyEnvPath); */
 				free(fullPathCommand);
+				fullPathCommand = NULL;
 			}
 		}
 	}
 	/* free(copyEnvPath); */
-	free(envPath);
+	_strFree(envPath);
 	free(command);
 	return (0);
 }

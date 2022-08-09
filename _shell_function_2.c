@@ -270,6 +270,13 @@ void freeArray(char **array, int size)
     }
 }
 
+void _strFree(char *string) {
+    if (string != NULL)
+    {
+        free(string);
+    }
+}
+
 char *_which(char *fullPathCommand, char *executable, char *envPath)
 {
     char *pathSep = ":";

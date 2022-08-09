@@ -34,6 +34,7 @@ char *_makeFullCommand(char *dst, char *command, char *fullPath);
 void clearAndFree(char *string);
 void _reset(char *string);
 void freeArray(char **array, int size);
+void _strFree(char *string);
 char *_which(char *fullPathCommand, char *executable, char *copyEnvPath);
 int _strContains(char *str1, char *str2, int maxLength);
 
