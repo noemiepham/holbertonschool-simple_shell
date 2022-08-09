@@ -75,6 +75,8 @@ int main(void)
 					printf("%s NOT FOUND\n", command[0]);
 				}
 
+				free(str);
+				str = NULL;
 				free(envPath);
 				envPath = NULL;
 				/* _reset(copyEnvPath); */
