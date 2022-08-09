@@ -17,7 +17,7 @@ int main(void)
 	char *envPath = NULL;
 	char *sep = "\n\t\r ";
 
-	envPath = _getenv("PATH");
+	/* envPath = _getenv("PATH"); */
 
 	while (signal)
 	{
@@ -55,7 +55,7 @@ int main(void)
 			else
 			{
 			/* 	printf("DEBUG bloc PATH\n"); */
-				/* envPath = _getenv("PATH"); */
+				envPath = _getenv("PATH");
 				/* copyEnvPath = _copyString(envPath, copyEnvPath); */
 				/* printf("DEBUG bloc PATH copyEnvPath %s\n", copyEnvPath); */
 
@@ -70,7 +70,7 @@ int main(void)
 					printf("%s NOT FOUND\n", command[0]);
 				}
 
-				/* free(envPath); */
+				free(envPath);
 				/* _reset(copyEnvPath); */
 				free(fullPathCommand);
 			}
