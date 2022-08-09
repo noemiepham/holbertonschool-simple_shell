@@ -40,6 +40,7 @@ int main(void)
 			if (strcmp(command[0], "exit") == 0)
 			{
 				free(command);
+				free(str);
 				exit(EXIT_SUCCESS);
 			}
 			else if (strcmp(command[0], "env") == 0)
