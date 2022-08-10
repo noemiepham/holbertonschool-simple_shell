@@ -43,7 +43,7 @@ int execute_command(char *command, char **argument)
 void _freeAll(char **command, char *str, char *envPath, char *fullPathCommand)
 {
 	free(command);
-	_strFree(str);
+	free(str);
 	_strFree(envPath);
 	_strFree(fullPathCommand);
 }
