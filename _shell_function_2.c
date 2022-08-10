@@ -23,19 +23,19 @@ char *_getenv(const char *name)
 		if (currentEnvProperty != NULL)
 		{
 			/* printf("DEBUG getenv loop property i:%d", i); */
-			/* printf(", value=[%s]", currentEnvProperty); */
+			/* printf(", value=[%s]\n", currentEnvProperty); */
 
 			if (_strContains(currentEnvProperty, (char *)name, envLength) == 0)
 			{
-				/* printf("DEBUG getenv key found =[%s]\n", envKey); */
+				/* printf("DEBUG getenv key found =[%s]\n", name); */
+				envValue = getEnvValue(currentEnvProperty, envValue);
 				break;
 			}
 		}
 		i++;
 	}
 
-	envValue = getEnvValue(currentEnvProperty, envValue);
-	/* printf("DEBUG getenv found =[%s] with value=[%s]\n", envKey, envValue); */
+	/* printf("DEBUG getenv found =[%s] with value=[%s]\n", name, envValue); */
 
 	return (envValue);
 }

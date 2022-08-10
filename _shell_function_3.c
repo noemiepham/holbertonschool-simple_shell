@@ -94,16 +94,23 @@ void executePath(char **command)
 
 	envPath = _getenv("PATH");
 
-	fullPathCommand = _which(fullPathCommand, command[0], envPath);
-	if (fullPathCommand != NULL)
+	if (envPath != NULL)
 	{
-		status_exec = execute_command(fullPathCommand, command);
-		if (status_exec == 1)
-			printf("Erreur execution de %s\n", command[0]);
+		fullPathCommand = _which(fullPathCommand, command[0], envPath);
+		if (fullPathCommand != NULL)
+		{
+			status_exec = execute_command(fullPathCommand, command);
+			if (status_exec == 1)
+				printf("Erreur execution de %s\n", command[0]);
+		}
+		else
+		{
+			printf("%s NOT FOUND\n", command[0]);
+		}
 	}
 	else
 	{
-		printf("%s NOT FOUND\n", command[0]);
+		printf("%s: not found\n", command[0]);
 	}
 
 	free(fullPathCommand);
