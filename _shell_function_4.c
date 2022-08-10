@@ -68,7 +68,8 @@ char *_makeFullCommand(char *dst, char *executable, char *fullPath)
 	/* printf("DEBUG _makeFullCommand exe length : %d\n", executableLength); */
 	/* printf("DEBUG _makeFullCommand fullPathLength : %d\n", fullPathLength); */
 
-	dst = calloc((executableLength + 1 + fullPathLength), sizeof(char));
+	/* +1 pour le caractère de fin d'un string */
+	dst = calloc((executableLength + 1 + fullPathLength + 1), sizeof(char));
 
 	if (dst == NULL)
 		return (NULL);
