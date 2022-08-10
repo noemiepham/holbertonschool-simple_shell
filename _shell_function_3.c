@@ -78,9 +78,10 @@ int readCommandLineAndExecute(char **command, char *str)
 	else
 	{
 		executePath(command, envPath, fullPathCommand);
-		_freeAll(command, str, envPath, fullPathCommand);
 		freePath = 0;
+		free(envPath);
 		envPath = NULL;
+		free(fullPathCommand);
 		fullPathCommand = NULL;
 	}
 

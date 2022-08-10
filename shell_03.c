@@ -32,7 +32,9 @@ int main(void)
 			freePath = readCommandLineAndExecute(command, str);
 			if (freePath == 0)
 			{
+				free(command);
 				command = NULL;
+				free(str);
 				str = NULL;
 			}
 		}
