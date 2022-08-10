@@ -54,7 +54,7 @@ void _freeAll(char **command, char *str, char *envPath)
  */
 int readCommandLineAndExecute(char **command, char *str)
 {
-	int freePath = 1;
+	int execOk = 1;
 	struct stat st;
 	char *envPath = NULL;
 
@@ -71,14 +71,15 @@ int readCommandLineAndExecute(char **command, char *str)
 	else if (stat(command[0], &st) == 0)
 	{
 		execute_command(command[0], command);
+		execOk = 0;
 	}
 	else
 	{
 		executePath(command);
-		freePath = 0;
+		execOk = 0;
 	}
 
-	return (freePath);
+	return (execOk);
 }
 
 /**

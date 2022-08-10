@@ -9,7 +9,7 @@ int main(void)
 	char *str = NULL;
 	size_t len = 0;
 	char **command;
-	int get, freePath;
+	int get, execOk;
 	int signal = 1;
 
 	while (1)
@@ -29,8 +29,8 @@ int main(void)
 		/* printf("DEBUG split_str %s\n", command[0]); */
 		if (command[0])
 		{
-			freePath = readCommandLineAndExecute(command, str);
-			if (freePath == 0)
+			execOk = readCommandLineAndExecute(command, str);
+			if (execOk == 0)
 			{
 				free(command);
 				command = NULL;
