@@ -75,6 +75,8 @@ int main(void)
 					printf("%s NOT FOUND\n", command[0]);
 				}
 
+				free(command);
+				command = NULL;
 				free(str);
 				str = NULL;
 				free(envPath);
