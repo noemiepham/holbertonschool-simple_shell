@@ -88,6 +88,14 @@ char *_makeFullCommand(char *dst, char *executable, char *fullPath)
 		dst[j] = executable[i];
 	}
 
+	/* il faut que argv se termine NULL. Sinon la fonction exec va traiter */
+	/* tous les caractères non null comme un argument */
+	/* conduisant à un comportement indéfini avec l'erreur */
+	/* même si le code libère bien explictement */
+	/* Syscall param access(pathname) points to unaddressable byte(s) */
+	/* "in use at exit: 0 bytes in 0 blocks" car trop bloquant pour Valgrind */
+	dst[j] = END_STRING_CHAR;
+
 	/* printf("DEBUG _makeFullCommand dst : %s\n", dst); */
 
 	return (dst);

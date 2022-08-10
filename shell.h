@@ -7,6 +7,7 @@
 #define PROPERTY_SEPARATROR '='
 #define PATH_SEPARATROR ':'
 #define COMMAND_LINE_SEPARATROR "\n\t\r "
+#define END_STRING_CHAR '\0'
 extern char **environ;
 
 #include <stdio.h>
