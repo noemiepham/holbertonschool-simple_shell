@@ -52,23 +52,23 @@ char *_which(char *fullPathCommand, char *executable, char *envPath)
  * _makeFullCommand - make full command
  *
  * @dst: dest string copy
- * @command: command getline
+ * @executable: executable from getline
  * @fullPath: full path
  * Return: Dest
  */
-char *_makeFullCommand(char *dst, char *command, char *fullPath)
+char *_makeFullCommand(char *dst, char *executable, char *fullPath)
 {
-	int commandLength = 0;
+	int executableLength = 0;
 	int fullPathLength = 0;
 	int i, j;
 
-	commandLength = _strlen(command);
+	executableLength = _strlen(executable);
 	fullPathLength = _strlen(fullPath);
 
-	/* printf("DEBUG _makeFullCommand command length : %d\n", commandLength); */
+	/* printf("DEBUG _makeFullCommand exe length : %d\n", executableLength); */
 	/* printf("DEBUG _makeFullCommand fullPathLength : %d\n", fullPathLength); */
 
-	dst = calloc((commandLength + 1 + fullPathLength), sizeof(char));
+	dst = calloc((executableLength + 1 + fullPathLength), sizeof(char));
 
 	if (dst == NULL)
 		return (NULL);
@@ -83,9 +83,9 @@ char *_makeFullCommand(char *dst, char *command, char *fullPath)
 
 	/* printf("DEBUG _makeFullCommand dst : %s\n", dst); */
 
-	for (i = 0, j = fullPathLength + 1; i < commandLength; i++, j++)
+	for (i = 0, j = fullPathLength + 1; i < executableLength; i++, j++)
 	{
-		dst[j] = command[i];
+		dst[j] = executable[i];
 	}
 
 	/* printf("DEBUG _makeFullCommand dst : %s\n", dst); */
