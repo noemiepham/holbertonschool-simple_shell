@@ -41,9 +41,9 @@ int main(void)
 			{
 				free(command);
 				free(str);
-				printf("DEBUG free envPath\n");
+				/* printf("DEBUG free envPath\n"); */
 				_strFree(envPath);
-				printf("DEBUG free fullPathCommand\n");
+				/* printf("DEBUG free fullPathCommand\n"); */
 				_strFree(fullPathCommand);
 				exit(EXIT_SUCCESS);
 			}
