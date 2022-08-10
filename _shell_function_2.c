@@ -6,7 +6,6 @@
  */
 char *_getenv(const char *name)
 {
-	int pathFound = 0;
 	int i = 0;
 	int envLength = _strlen((char *)name);
 	int environSize = 0;
@@ -32,7 +31,6 @@ char *_getenv(const char *name)
 			if (_strContains(currentEnvProperty, (char *)name, envLength) == 0)
 			{
 				/* printf("DEBUG getenv key found =[%s]\n", envKey); */
-				pathFound = 1;
 				break;
 			}
 		}
