@@ -57,7 +57,6 @@ void _freeAll(char **command, char *str, char *envPath, char *fullPathCommand)
 int readCommandLineAndExecute(char **command, char *str)
 {
 	int freePath = 1;
-	int status_exec;
 	struct stat st;
 	char *envPath = NULL;
 	char *fullPathCommand = NULL;
@@ -74,23 +73,11 @@ int readCommandLineAndExecute(char **command, char *str)
 	}
 	else if (stat(command[0], &st) == 0)
 	{
-		status_exec = execute_command(command[0], command);
+		execute_command(command[0], command);
 	}
 	else
 	{
-		envPath = _getenv("PATH");
-
-		fullPathCommand = _which(fullPathCommand, command[0], envPath);
-		if (fullPathCommand != NULL)
-		{
-			status_exec = execute_command(fullPathCommand, command);
-			if (status_exec == 1)
-				printf("Erreur execution de %s\n", command[0]);
-		}
-		else
-		{
-			printf("%s NOT FOUND\n", command[0]);
-		}
+		executePath(command, envPath, fullPathCommand);
 		_freeAll(command, str, envPath, fullPathCommand);
 		freePath = 0;
 		envPath = NULL;
@@ -98,4 +85,29 @@ int readCommandLineAndExecute(char **command, char *str)
 	}
 
 	return (freePath);
+}
+
+/**
+ * executePath - lexecute avec PATH
+ * @command: commande from getline
+ * @envPath: variable env PATH
+ * @fullPathCommand: chemin commande complète
+ */
+void executePath(char **command, char *envPath, char *fullPathCommand)
+{
+	int status_exec = 1;
+
+	envPath = _getenv("PATH");
+
+	fullPathCommand = _which(fullPathCommand, command[0], envPath);
+	if (fullPathCommand != NULL)
+	{
+		status_exec = execute_command(fullPathCommand, command);
+		if (status_exec == 1)
+			printf("Erreur execution de %s\n", command[0]);
+	}
+	else
+	{
+		printf("%s NOT FOUND\n", command[0]);
+	}
 }

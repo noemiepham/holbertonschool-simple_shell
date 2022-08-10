@@ -28,6 +28,7 @@ char *_getenv(const char *name);
 char **_copyEnvironment(int environSize);
 int readCommandLineAndExecute(char **command, char *str);
 int execute_command(char *command, char **argument);
+void executePath(char **command, char *envPath, char *fullPathCommand);
 
 char *getEnvValue(char *env,  char *envValue);
 char *_strCopy(char *src, char *dst);
