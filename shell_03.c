@@ -15,8 +15,6 @@ int main(void)
 	char *fullPathCommand = NULL;
 	char *envPath = NULL;
 
-	/* envPath = _getenv("PATH"); */
-
 	while (signal)
 	{
 		signal = isatty(0);
@@ -59,8 +57,6 @@ int main(void)
 			{
 			/* 	printf("DEBUG bloc PATH\n"); */
 				envPath = _getenv("PATH");
-				/* copyEnvPath = _copyString(envPath, copyEnvPath); */
-				/* printf("DEBUG bloc PATH copyEnvPath %s\n", copyEnvPath); */
 
 				fullPathCommand = _which(fullPathCommand, command[0], envPath);
 				if (fullPathCommand != NULL)
@@ -84,7 +80,6 @@ int main(void)
 			}
 		}
 	}
-	/* free(copyEnvPath); */
 	_strFree(envPath);
 	free(command);
 	free(str);
