@@ -25,6 +25,7 @@ void debugArray(char **arr);
 void _printev(void);
 void get_absolute_path(char **cmd);
 char *_getenv(const char *name);
+char **_copyEnvironment(int environSize);
 int execute_command(char *command, char **argument);
 
 char *getEnvValue(char *env,  char *envValue);

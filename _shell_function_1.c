@@ -43,39 +43,64 @@ int _strlen(char *s)
 	}
 return (strlen);
 }
-/**
- * _printev - prints environnement variables
- *
- * Return: any value
- */
-void _printev(void)
-{
-	int i = 0;
 
-	while (environ[i] != NULL)
+/**
+ * _strCopy - coppy string
+ *
+ * @src: source file
+ * @dst: dest string
+ * Return: string dest
+ */
+char *_strCopy(char *src, char *dst)
+{
+
+	int size = 0;
+	int i;
+
+	while (src[size])
+		size++;
+
+	for (i = 0; i < size; i++)
 	{
-		printf("%s\n", environ[i]);
-		i++;
+		dst[i] = src[i];
 	}
+
+	return (dst);
 }
 
 /**
- * debugArray - pour debuge le projet
- *@arr: varibale pour tester
+ * _strContains - test si un string est contenu
+ *  dans l'autre jusqu'à maxLength
+ * @str1: 1ere string
+ * @str2: 2e string
+ * @maxLength:longueur max jusqu'où chercher
+ * Return: int
  */
-void debugArray(char **arr)
+int _strContains(char *str1, char *str2, int maxLength)
 {
-	unsigned int i = 0;
+	int contains = 0;
+	int i;
 
-	if (arr != NULL)
+	for (i = 0; i < maxLength; i++)
 	{
-		while (arr[i] != NULL)
+		if (str1[i] != str2[i])
 		{
-			printf("DEBUG arr at index i %d=[%s]\n", i, arr[i]);
-			i++;
+			contains = 1;
+			break;
 		}
-	} else
+	}
+	return (contains);
+}
+
+/**
+ * _strFree - free string
+ *
+ * @string: string to free
+ */
+void _strFree(char *string)
+{
+	if (string != NULL)
 	{
-		printf("Array source id null\n");
+		free(string);
 	}
 }
