@@ -1,26 +1,4 @@
 #include "shell.h"
-/**
- * _countCharInString - count string char 
- * 
- * @string: count char string
- * @toLook: char to compaire
- * Return: number of char
- */
-int _countCharInString(char *string, char toLook)
-{
-	int count = 0;
-	int i;
-	int length = _strlen(string);
-	for (i = 0; i < length; i++)
-	{
-		if (string[i] == toLook)
-		{
-			count++;
-		}
-	}
-
-	return (count);
-}
 
 /**
  * execute_command - execute la commande if true

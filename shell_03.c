@@ -79,7 +79,6 @@ int main(void)
 				str = NULL;
 				free(envPath);
 				envPath = NULL;
-				/* _reset(copyEnvPath); */
 				free(fullPathCommand);
 				fullPathCommand = NULL;
 			}

@@ -65,38 +65,6 @@ char *_getenv(const char *name)
 
 	return (envValue);
 }
-/**
- * getEnvKey - Get the Env Key object
- * 
- * @env: environ
- * @envKey: envkey
- * Return: enley
- */
-char *getEnvKey(char *env, char *envKey)
-{
-	int env_length = 0;
-	int separatorPosition = 0;
-	int i, j;
-	while (env[env_length])
-		env_length++;
-
-	while (env[separatorPosition] != PROPERTY_SEPARATROR)
-		separatorPosition++;
-	/* printf("getEnvKey separatorPosition : %d\n", separatorPosition); */
-
-	envKey = calloc(separatorPosition, sizeof(char));
-
-	if (envKey == NULL)
-		return (NULL);
-
-	for (i = 0, j = 0; j < separatorPosition; i++, j++)
-	{
-		envKey[i] = env[j];
-	}
-
-	/* printf("getEnvKey : %s\n", envKey); */
-	return envKey;
-}
 
 /**
  * getEnvValue - Get the Env Value object

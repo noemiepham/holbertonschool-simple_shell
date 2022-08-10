@@ -11,8 +11,6 @@ char **split_str(char *str)
 	char *cur_word;
 	unsigned int i = 0;
 	
-
-	
 	array = malloc(sizeof(char) * BUFFER);
 	if (array == NULL)
 		return (NULL);

@@ -1,32 +1,5 @@
 #include "shell.h"
-/**
- * clearAndFree
- * 
- * @string 
- */
-void clearAndFree(char *string)
-{
-	_reset(string);
-	free(string);
-}
-/**
- * _reset 
- * 
- * @string 
- */
-void _reset(char *string)
-{
-	int length = 0;
 
-	if (string != NULL)
-	{
-		while (string[length])
-		{
-			string[length] = '\0';
-			length++;
-		}
-	}
-}
 /**
  * freeArray
  * 

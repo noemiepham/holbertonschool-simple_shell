@@ -27,13 +27,9 @@ void get_absolute_path(char **cmd);
 char *_getenv(const char *name);
 int execute_command(char *command, char **argument);
 
-char* getEnvKey(char *env, char *envKey);
 char *getEnvValue(char *env,  char *envValue);
-int _countCharInString(char *string, char toLook);
 char *_strCopy(char *src, char *dst);
 char *_makeFullCommand(char *dst, char *command, char *fullPath);
-void clearAndFree(char *string);
-void _reset(char *string);
 void freeArray(char **array, int size);
 void _strFree(char *string);
 char *_which(char *fullPathCommand, char *executable, char *copyEnvPath);
