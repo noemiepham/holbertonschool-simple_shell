@@ -25,18 +25,19 @@ int main(void)
 			free(str);
 			exit(EXIT_SUCCESS);
 		}
+		execOk = 0;
 		command = split_str(str);
 		/* printf("DEBUG split_str %s\n", command[0]); */
 		if (command[0])
 		{
 			execOk = readCommandLineAndExecute(command, str);
-			if (execOk == 0)
-			{
-				free(command);
-				command = NULL;
-				free(str);
-				str = NULL;
-			}
+		}
+		if (execOk == 0)
+		{
+			free(command);
+			command = NULL;
+			free(str);
+			str = NULL;
 		}
 	}
 	free(command);
