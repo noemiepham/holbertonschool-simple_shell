@@ -1,14 +1,15 @@
 #include "shell.h"
 
 /**
- * freeArray
- * 
- * @array 
- * @size 
+ * freeArray - free array of strings
+ *
+ * @array: array to free
+ * @size: size of array
  */
 void freeArray(char **array, int size)
 {
 	int i;
+
 	if (array != NULL)
 	{
 		for (i = 0; i < size; i++)
@@ -18,10 +19,11 @@ void freeArray(char **array, int size)
 		free(array);
 	}
 }
+
 /**
- * _strFree 
- * 
- * @string 
+ * _strFree - free string
+ *
+ * @string: string to free
  */
 void _strFree(char *string)
 {
@@ -30,13 +32,14 @@ void _strFree(char *string)
 		free(string);
 	}
 }
+
 /**
- * _which
- * 
- * @ullPathCommand 
- * @executable 
- * @envPath 
- * Return: char* 
+ * _which - cherche chemin complet de executable à partir de env PATH
+ *
+ * @fullPathCommand: commande complète
+ * @executable: executable
+ * @envPath: les chemins de la var d'env PATH
+ * Return: char* le chemin de commande complète
  */
 char *_which(char *fullPathCommand, char *executable, char *envPath)
 {
@@ -57,7 +60,8 @@ char *_which(char *fullPathCommand, char *executable, char *envPath)
 	j = 0;
 	while (path_token != NULL)
 	{
-		/* printf("DEBUG _which PATH j=[%d], value=[%s] for cmd=[%s]\n", j, path_token, executable); */
+		/* printf("DEBUG _which PATH j=[%d]", j); */
+		/* printf(", value=[%s], cmd=[%s]\n", path_token, executable); */
 		fullPathCommand = _makeFullCommand(fullPathCommand, executable, path_token);
 		if (access(fullPathCommand, X_OK) != 0)
 		{
@@ -76,13 +80,14 @@ char *_which(char *fullPathCommand, char *executable, char *envPath)
 
 	return (fullPathCommand);
 }
+
 /**
- * _strContains 
- * 
- * @str1 
- * @str2 
- * @maxLength 
- * Return: int 
+ * _strContains - test si un string est contenu
+ *  dans l'autre jusqu'à maxLength
+ * @str1: 1ere string
+ * @str2: 2e string
+ * @maxLength:longueur max jusqu'où chercher
+ * Return: int
  */
 int _strContains(char *str1, char *str2, int maxLength)
 {
@@ -97,5 +102,5 @@ int _strContains(char *str1, char *str2, int maxLength)
 			break;
 		}
 	}
-	return contains;
+	return (contains);
 }

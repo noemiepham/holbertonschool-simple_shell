@@ -35,7 +35,7 @@ int execute_command(char *command, char **argument)
 }
 /**
  * _strCopy - coppy string
- * 
+ *
  * @src: source file
  * @dst: dest string
  * Return: string dest
@@ -45,6 +45,7 @@ char *_strCopy(char *src, char *dst)
 
 	int size = 0;
 	int i;
+
 	while (src[size])
 		size++;
 
@@ -55,12 +56,13 @@ char *_strCopy(char *src, char *dst)
 
 	return (dst);
 }
+
 /**
  * _makeFullCommand - make full command
- * 
- * @dst: dest string coppy 
+ *
+ * @dst: dest string copy
  * @command: command getline
- * @fullPath: full path 
+ * @fullPath: full path
  * Return: Dest
  */
 char *_makeFullCommand(char *dst, char *command, char *fullPath)
@@ -72,8 +74,8 @@ char *_makeFullCommand(char *dst, char *command, char *fullPath)
 	commandLength = _strlen(command);
 	fullPathLength = _strlen(fullPath);
 
-	/* printf("DEBUG _makeFullCommand command length : %d\n", commandLength);
-	printf("DEBUG _makeFullCommand full path length : %d\n", fullPathLength); */
+	/* printf("DEBUG _makeFullCommand command length : %d\n", commandLength); */
+	/* printf("DEBUG _makeFullCommand fullPathLength : %d\n", fullPathLength); */
 
 	dst = calloc((commandLength + 1 + fullPathLength), sizeof(char));
 

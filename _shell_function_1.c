@@ -10,11 +10,11 @@ char **split_str(char *str)
 	char **array;
 	char *cur_word;
 	unsigned int i = 0;
-	
+
 	array = malloc(sizeof(char) * BUFFER);
 	if (array == NULL)
 		return (NULL);
-		
+
 	cur_word = strtok(str, COMMAND_LINE_SEPARATROR);
 
 	while (cur_word != NULL)
@@ -51,6 +51,7 @@ return (strlen);
 void _printev(void)
 {
 	int i = 0;
+
 	while (environ[i] != NULL)
 	{
 		printf("%s\n", environ[i]);
@@ -65,6 +66,7 @@ void _printev(void)
 void debugArray(char **arr)
 {
 	unsigned int i = 0;
+
 	if (arr != NULL)
 	{
 		while (arr[i] != NULL)

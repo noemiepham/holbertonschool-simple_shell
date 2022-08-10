@@ -1,10 +1,9 @@
 #include "shell.h"
-/*
+/**
  * _getenv - get environ
  * @name: name de environ
  * Return: environ value
  */
-
 char *_getenv(const char *name)
 {
 	int pathFound = 0;
@@ -68,7 +67,7 @@ char *_getenv(const char *name)
 
 /**
  * getEnvValue - Get the Env Value object
- * 
+ *
  * @env: environ
  * @envValue: value of environ
  * Return: value
@@ -78,6 +77,7 @@ char *getEnvValue(char *env, char *envValue)
 	int env_length = 0;
 	int separatorPosition = 0;
 	int i, j;
+
 	while (env[env_length])
 		env_length++;
 	/* printf("getEnvValue env_length : %d\n", env_length); */
