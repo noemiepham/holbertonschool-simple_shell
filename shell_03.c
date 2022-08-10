@@ -88,5 +88,6 @@ int main(void)
 	/* free(copyEnvPath); */
 	_strFree(envPath);
 	free(command);
+	free(str);
 	return (0);
 }
