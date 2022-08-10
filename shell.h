@@ -6,6 +6,7 @@
 #define PROMPT "$ "
 #define PROPERTY_SEPARATROR '='
 #define PATH_SEPARATROR ':'
+#define COMMAND_LINE_SEPARATROR "\n\t\r "
 extern char **environ;
 
 #include <stdio.h>
@@ -18,7 +19,7 @@ extern char **environ;
 
 /* Prortotypes */
 
-char **split_str(char *str, char *sep);
+char **split_str(char *str);
 int _strlen(char *s);
 void debugArray(char **arr);
 void _printev(void);

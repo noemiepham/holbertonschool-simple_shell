@@ -5,7 +5,7 @@
  * @str: string array
  * Return: new array
  */
-char **split_str(char *str, char *sep)
+char **split_str(char *str)
 {
 	char **array;
 	char *cur_word;
@@ -17,13 +17,13 @@ char **split_str(char *str, char *sep)
 	if (array == NULL)
 		return (NULL);
 		
-	cur_word = strtok(str, sep);
+	cur_word = strtok(str, COMMAND_LINE_SEPARATROR);
 
 	while (cur_word != NULL)
 	{
 		array[i] = cur_word;
 		i++;
-		cur_word = strtok(NULL, sep);
+		cur_word = strtok(NULL, COMMAND_LINE_SEPARATROR);
 	}
 	array[i] = NULL;
 	return (array);

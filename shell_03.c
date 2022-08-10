@@ -6,7 +6,6 @@
  */
 int main(void)
 {
-
 	char *str = NULL;
 	size_t len = 0;
 	char **command;
@@ -15,7 +14,6 @@ int main(void)
 	struct stat st;
 	char *fullPathCommand = NULL;
 	char *envPath = NULL;
-	char *sep = "\n\t\r ";
 
 	/* envPath = _getenv("PATH"); */
 
@@ -33,7 +31,7 @@ int main(void)
 			free(str);
 			exit(EXIT_SUCCESS);
 		}
-		command = split_str(str, sep);
+		command = split_str(str);
 		/* printf("DEBUG split_str %s\n", command[0]); */
 		if (command[0])
 		{
