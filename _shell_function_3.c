@@ -74,10 +74,8 @@ int readCommandLineAndExecute(char **command, char *str)
 	}
 	else
 	{
-		executePath(command, envPath);
+		executePath(command);
 		freePath = 0;
-		free(envPath);
-		envPath = NULL;
 	}
 
 	return (freePath);
@@ -86,11 +84,11 @@ int readCommandLineAndExecute(char **command, char *str)
 /**
  * executePath - lexecute avec PATH
  * @command: commande from getline
- * @envPath: variable env PATH
  */
-void executePath(char **command, char *envPath)
+void executePath(char **command)
 {
 	int status_exec = 1;
+	char *envPath = NULL;
 	char *fullPathCommand = NULL;
 
 	envPath = _getenv("PATH");
@@ -109,4 +107,6 @@ void executePath(char **command, char *envPath)
 
 	free(fullPathCommand);
 	fullPathCommand = NULL;
+	free(envPath);
+	envPath = NULL;
 }
