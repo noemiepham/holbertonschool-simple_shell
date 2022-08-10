@@ -12,7 +12,7 @@ int main(void)
 	int get, freePath;
 	int signal = 1;
 
-	while (signal)
+	while (1)
 	{
 		signal = isatty(0);
 
