@@ -123,7 +123,7 @@ int executePath(char **command)
 		}
 		else
 		{
-			status_exec = 2;
+			status_exec = 127;
 		}
 	}
 	else
