@@ -56,6 +56,7 @@ void _freeAll(char **command, char *str, char *envPath)
  */
 int readCommandLineAndExecute(char **command, char *str, int argc, char *arv[])
 {
+	int flagFree = 0;
 	int execOk = 1;
 	struct stat st;
 	char *envPath = NULL;
@@ -73,7 +74,7 @@ int readCommandLineAndExecute(char **command, char *str, int argc, char *arv[])
 	else if (stat(command[0], &st) == 0)
 	{
 		execute_command(command[0], command);
-		execOk = 0;
+		flagFree = 1;
 	}
 	else
 	{
@@ -90,14 +91,16 @@ int readCommandLineAndExecute(char **command, char *str, int argc, char *arv[])
 				printf("%s: 1: %s not found\n", command[0], command[1]);
 			}
 		}
+		flagFree = 1;
 	}
 
-	return (execOk);
+	return (flagFree);
 }
 
 /**
  * executePath - lexecute avec PATH
  * @command: commande from getline
+ * Return: statut execute
  */
 int executePath(char **command)
 {
