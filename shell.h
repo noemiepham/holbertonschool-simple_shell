@@ -27,7 +27,7 @@ void _printev(void);
 void get_absolute_path(char **cmd);
 char *_getenv(const char *name);
 char **_copyEnvironment(int environSize);
-int readCommandLineAndExecute(char **command, char *str, int argc, char *arv[]);
+int readAndExec(char **command, char *str, int argc, char *arv[]);
 int execute_command(char *command, char **argument);
 int executePath(char **command);
 

@@ -47,14 +47,14 @@ void _freeAll(char **command, char *str, char *envPath)
 }
 
 /**
- * readCommandLineAndExecute - libère tous les objets
+ * readAndExec - parse la commande et exécute
  * @command: commande from getline
  * @str: buffer command
  * @argc: nombre d'arguments main
  * @arv: prog et arguments main
  * Return: flag pour free
  */
-int readCommandLineAndExecute(char **command, char *str, int argc, char *arv[])
+int readAndExec(char **command, char *str, int argc, char *arv[])
 {
 	int flagFree = 0;
 	int execOk = 1;

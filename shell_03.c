@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 		/* printf("DEBUG split_str %s\n", command[0]); */
 		if (command[0])
 		{
-			flagFree = readCommandLineAndExecute(command, str, argc, argv);
+			flagFree = readAndExec(command, str, argc, argv);
 		}
 		if (flagFree == 1)
 		{
