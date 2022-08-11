@@ -21,6 +21,11 @@ int execute_command(char *command, char **argument)
 	else if (pid != 0)
 	{
 		wait(&status);
+		if (WIFEXITED(status) && !isatty(0))
+		{
+			exec = WEXITSTATUS(status);
+			/* printf("DEBUG cas non interactif %d\n", exec); */
+		}
 	}
 	else if (pid == 0)
 	{

@@ -39,6 +39,10 @@ int main(int argc, char *argv[])
 			command = NULL;
 			free(str);
 			str = NULL;
+			if (lastExec > 0 && !isatty(0))
+			{
+				exit(lastExec);
+			}
 		}
 	}
 	free(command);
