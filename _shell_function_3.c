@@ -105,7 +105,7 @@ void executePath(char **command)
 		}
 		else
 		{
-			printf("%s NOT FOUND\n", command[0]);
+			printf("%s: not found\n", command[0]);
 		}
 	}
 	else
