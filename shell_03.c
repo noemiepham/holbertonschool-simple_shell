@@ -1,10 +1,11 @@
 #include "shell.h"
 /**
  * main - simple shell
- *
+ * @argc: nombre d'arguments passés au main
+ * @argv: les arguments passés au main
  * Return:0
  */
-int main(void)
+int main(int argc, char *argv[])
 {
 	char *str = NULL;
 	size_t len = 0;
@@ -25,12 +26,13 @@ int main(void)
 			free(str);
 			exit(EXIT_SUCCESS);
 		}
+
 		execOk = 0;
 		command = split_str(str);
 		/* printf("DEBUG split_str %s\n", command[0]); */
 		if (command[0])
 		{
-			execOk = readCommandLineAndExecute(command, str);
+			execOk = readCommandLineAndExecute(command, str, argc, argv);
 		}
 		if (execOk == 0)
 		{

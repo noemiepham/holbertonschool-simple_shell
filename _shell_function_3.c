@@ -50,9 +50,11 @@ void _freeAll(char **command, char *str, char *envPath)
  * readCommandLineAndExecute - libère tous les objets
  * @command: commande from getline
  * @str: buffer command
+ * @argc: nombre d'arguments main
+ * @arv: prog et arguments main
  * Return: flag pour free
  */
-int readCommandLineAndExecute(char **command, char *str)
+int readCommandLineAndExecute(char **command, char *str, int argc, char *arv[])
 {
 	int execOk = 1;
 	struct stat st;
@@ -75,8 +77,19 @@ int readCommandLineAndExecute(char **command, char *str)
 	}
 	else
 	{
-		executePath(command);
-		execOk = 0;
+		execOk = (int)argc;
+		execOk = executePath(command);
+		if (execOk == 2)
+		{
+			if (command[1] == NULL)
+			{
+				printf("%s: 1: %s: not found\n", arv[0], command[0]);
+			}
+			else
+			{/* dans main */
+				printf("%s: 1: %s not found\n", command[0], command[1]);
+			}
+		}
 	}
 
 	return (execOk);
@@ -86,7 +99,7 @@ int readCommandLineAndExecute(char **command, char *str)
  * executePath - lexecute avec PATH
  * @command: commande from getline
  */
-void executePath(char **command)
+int executePath(char **command)
 {
 	int status_exec = 1;
 	char *envPath = NULL;
@@ -105,16 +118,18 @@ void executePath(char **command)
 		}
 		else
 		{
-			printf("%s: not found\n", command[0]);
+			status_exec = 2;
 		}
 	}
 	else
 	{
-		printf("%s: not found\n", command[0]);
+		status_exec = 2;
 	}
 
 	free(fullPathCommand);
 	fullPathCommand = NULL;
 	free(envPath);
 	envPath = NULL;
+
+	return (status_exec);
 }
