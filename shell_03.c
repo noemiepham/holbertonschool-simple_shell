@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 	char *str = NULL;
 	size_t len = 0;
 	char **command;
-	int get, flagFree;
+	int get, lastExec = 0;
 	int signal = 1;
 
 	while (1)
@@ -27,14 +27,13 @@ int main(int argc, char *argv[])
 			exit(EXIT_SUCCESS);
 		}
 
-		flagFree = 0;
 		command = split_str(str);
 		/* printf("DEBUG split_str %s\n", command[0]); */
 		if (command[0])
 		{
-			flagFree = readAndExec(command, str, argc, argv);
+			lastExec = readAndExec(command, str, argc, argv);
 		}
-		if (flagFree == 1)
+		if (lastExec > -1)
 		{
 			free(command);
 			command = NULL;

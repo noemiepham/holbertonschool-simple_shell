@@ -56,8 +56,7 @@ void _freeAll(char **command, char *str, char *envPath)
  */
 int readAndExec(char **command, char *str, int argc, char *arv[])
 {
-	int flagFree = 0;
-	int execOk = 1;
+	int execOk = -1;
 	struct stat st;
 	char *envPath = NULL;
 
@@ -73,14 +72,13 @@ int readAndExec(char **command, char *str, int argc, char *arv[])
 	}
 	else if (stat(command[0], &st) == 0)
 	{
-		execute_command(command[0], command);
-		flagFree = 1;
+		execOk = execute_command(command[0], command);
 	}
 	else
 	{
 		execOk = (int)argc;
 		execOk = executePath(command);
-		if (execOk == 2)
+		if (execOk > 0)
 		{
 			if (command[1] == NULL)
 			{
@@ -91,10 +89,9 @@ int readAndExec(char **command, char *str, int argc, char *arv[])
 				printf("%s: 1: %s not found\n", command[0], command[1]);
 			}
 		}
-		flagFree = 1;
 	}
 
-	return (flagFree);
+	return (execOk);
 }
 
 /**
@@ -126,7 +123,7 @@ int executePath(char **command)
 	}
 	else
 	{
-		status_exec = 2;
+		status_exec = 127;
 	}
 
 	free(fullPathCommand);
