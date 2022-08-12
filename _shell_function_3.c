@@ -87,11 +87,11 @@ int readAndExec(char **command, char *str, int argc, char *arv[])
 		{
 			if (command[1] == NULL)
 			{
-				printf("%s: 1: %s: not found\n", arv[0], command[0]);
+				fprintf(stderr, "%s: 1: %s: not found\n", arv[0], command[0]);
 			}
 			else
 			{/* dans main */
-				printf("%s: 1: %s not found\n", command[0], command[1]);
+				fprintf(stderr, "%s: 1: %s not found\n", command[0], command[1]);
 			}
 		}
 	}
